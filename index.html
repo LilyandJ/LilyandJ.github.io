@@ -146,36 +146,67 @@
           <div id="js-content" class="content-ll">
             
   
-    <article id="post-hello-world" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-闭包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/12/hello-world/">Hello World</a>
+      <a class="article-title" href="/2017/04/12/闭包/">闭包</a>
     </h1>
   
 
         
-        <a href="/2017/10/12/hello-world/" class="archive-article-date">
-  	<time datetime="2017-10-12T15:36:04.980Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-12</time>
+        <a href="/2017/04/12/闭包/" class="archive-article-date">
+  	<time datetime="2017-04-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-12</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>Welcome to <a href="https://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo new <span class="string">"My New Post"</span></div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo server</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo generate</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">$ hexo deploy</div></pre></td></tr></table></figure>
-<p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+        <h3 id="闭包的概念"><a href="#闭包的概念" class="headerlink" title="闭包的概念"></a>闭包的概念</h3><p>闭包从字面意思理解就是闭合, 包起来.</p>
+<p>简单的来说闭包就是,<strong><em>一个具有封闭的对外不公开的, 包裹结构, 或空间.</em></strong></p>
+<p>在JavaScript中函数可以构成闭包. 一般函数是一个代码结构的封闭结构, 即包裹的特性, 同时根据作用域规则, 只允许函数访问外部的数据, 外部无法访问函数内部的数据, 即封闭的对外不公开的特性. 因此说函数可以构成闭包.</p>
+<h3 id="那闭包要解决什么问题呢？"><a href="#那闭包要解决什么问题呢？" class="headerlink" title="那闭包要解决什么问题呢？"></a>那闭包要解决什么问题呢？</h3><ol>
+<li>因为闭包内的数据不允许外界访问</li>
+<li>要解决的问题就是间接访问该数据</li>
+</ol>
+<p><strong>函数就可以构成闭包, 要解决的问题就是访问到函数内部的数据</strong></p>
+<p>我们观察下面的函数<code>foo</code>，在<code>foo</code>内部有一个变量<code>num</code>，能否在函数外部访问到这个变量<code>num</code>呢？</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> num = <span class="number">123</span>;</div><div class="line">    <span class="keyword">return</span> num;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> res = foo();</div><div class="line"><span class="built_in">console</span>.log( res ); <span class="comment">// =&gt; 123</span></div></pre></td></tr></table></figure>
+<p>分析：</p>
+<p>在上面的代码中，确实可以访问到<code>num</code>这个函数内部的变量。但是能不能多次访问呢？</p>
+<p>不能，因为每次访问都得重新调用一次<code>foo</code>函数，每次调用都会重新创建一个<code>num = 123</code>，然后返回。</p>
+<h4 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h4><p>函数内的数据不能直接在函数外被访问，是因为作用域的关系，上级作用域不能直接访问下级作用域中的数据。</p>
+<p>但是如果反过来，下级作用域可以直接访问上级作用域中的数据。那么如果在函数<code>foo</code>内定义一个函数，那么在这个内部函数中是可以直接访问<code>foo</code>中的<code>num</code>的。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> num = <span class="built_in">Math</span>.random();    </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> num;    </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> func;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> f = foo();</div><div class="line"><span class="comment">// f可以直接访问num，而且多次访问，访问的也是同一个，并不会返回新的num</span></div><div class="line"><span class="keyword">var</span> res1 = f();</div><div class="line"><span class="keyword">var</span> res2 = f();</div></pre></td></tr></table></figure>
+<h3 id="如何获得超过一个数据"><a href="#如何获得超过一个数据" class="headerlink" title="如何获得超过一个数据"></a>如何获得超过一个数据</h3><p>函数的返回值只能有一个，那按照上面的方法，我们只能对函数内部的一个数据进行操作。怎么操作函数内的多个数据呢？</p>
+<p>可以使用对象，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> num1 = <span class="built_in">Math</span>.random();</div><div class="line">    <span class="keyword">var</span> num2 = <span class="built_in">Math</span>.random();</div><div class="line">    <span class="comment">//可以将多个函数包含在一个对象内进行返回，这样就能在函数外部操作当前函数内的多个变量</span></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        num1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> num1;</div><div class="line">        &#125;,</div><div class="line">        num2: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> num2;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
+<h3 id="如何完成读取一个数据和修改这个数据"><a href="#如何完成读取一个数据和修改这个数据" class="headerlink" title="如何完成读取一个数据和修改这个数据"></a>如何完成读取一个数据和修改这个数据</h3><p>前面讲的都是如何去获取函数内部的数据，接下来我们考虑如何修改函数内部的数据。</p>
+<p>同样，也是使用内部的函数进行操作。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> num = <span class="built_in">Math</span>.random();</div><div class="line">    <span class="comment">//分别定义get和set函数，使用对象进行返回</span></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="comment">//get_num负责获取数据</span></div><div class="line">        get_num: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;    </div><div class="line">            <span class="keyword">return</span> num;</div><div class="line">        &#125;,</div><div class="line">        <span class="comment">//set_num负责设置数据</span></div><div class="line">        set_num: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">            num = value;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="闭包的基本结构"><a href="#闭包的基本结构" class="headerlink" title="闭包的基本结构"></a>闭包的基本结构</h3><p><strong>一般闭包要解决的的问题就是要想办法间接的获得函数内数据的使用权. 那么我们的可以总结出一个基本的使用模型.</strong></p>
+<ol>
+<li>写一个函数, 函数内定义一个新函数, 返回新函数, 用新函数获得函数内的数据</li>
+<li>写一个函数, 函数内定义一个对象, 对象中绑定多个函数( 方法 ), 返回对象, 利用对象的方法访问函数内的数据</li>
+</ol>
+<p>##总结: 闭包<br>    1) 什么是闭包？<br>        闭包就是一种作用域的体现，体现外部可以访问内部的数据!</p>
+<pre><code>2) 闭包的特征
+    a. 函数内嵌套函数
+    b. 正常情况下，函数内可以访问函数外的数据，但是函数外不能访问函数内的数据
+    c. 通过特殊的语法结构，可以让函数外的语句访问函数内的数据（闭包典型体现）
+    d. 将内部函数暴露到全局上，延缓资源回收
 
+3) 典型写法
+    (function(){
+        var i=1;
+        window.count=function(){
+            console.log(i++);
+        }
+    })();
+</code></pre>
       
 
       
@@ -187,7 +218,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/12/hello-world/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/04/12/闭包/">展开全文 >></a>
         </p>
       
 
@@ -217,52 +248,174 @@
 
 
   
-    <article id="post-闭包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+    <article id="post-递归" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/12/闭包/">闭包</a>
+      <a class="article-title" href="/2017/04/01/递归/">递归</a>
     </h1>
   
 
         
-        <a href="/2017/10/12/闭包/" class="archive-article-date">
-  	<time datetime="2017-10-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-12</time>
+        <a href="/2017/04/01/递归/" class="archive-article-date">
+  	<time datetime="2017-03-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-01</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="闭包"><a href="#闭包" class="headerlink" title="闭包"></a>闭包</h2><h3 id="闭包的概念"><a href="#闭包的概念" class="headerlink" title="闭包的概念"></a>闭包的概念</h3><p>闭包从字面意思理解就是闭合, 包起来.</p>
-<p>简单的来说闭包就是,<strong><em>一个具有封闭的对外不公开的, 包裹结构, 或空间.</em></strong></p>
-<p>在JavaScript中函数可以构成闭包. 一般函数是一个代码结构的封闭结构, 即包裹的特性, 同时根据作用域规则, 只允许函数访问外部的数据, 外部无法访问函数内部的数据, 即封闭的对外不公开的特性. 因此说函数可以构成闭包.</p>
-<h3 id="那闭包要解决什么问题呢？"><a href="#那闭包要解决什么问题呢？" class="headerlink" title="那闭包要解决什么问题呢？"></a>那闭包要解决什么问题呢？</h3><ol>
-<li>因为闭包内的数据不允许外界访问</li>
-<li>要解决的问题就是间接访问该数据</li>
-</ol>
-<p><strong>函数就可以构成闭包, 要解决的问题就是访问到函数内部的数据</strong></p>
-<p>我们观察下面的函数<code>foo</code>，在<code>foo</code>内部有一个变量<code>num</code>，能否在函数外部访问到这个变量<code>num</code>呢？</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> num = <span class="number">123</span>;</div><div class="line">    <span class="keyword">return</span> num;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> res = foo();</div><div class="line"><span class="built_in">console</span>.log( res ); <span class="comment">// =&gt; 123</span></div></pre></td></tr></table></figure>
-<p>分析：</p>
-<p>在上面的代码中，确实可以访问到<code>num</code>这个函数内部的变量。但是能不能多次访问呢？</p>
-<p>不能，因为每次访问都得重新调用一次<code>foo</code>函数，每次调用都会重新创建一个<code>num = 123</code>，然后返回。</p>
-<h4 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h4><p>函数内的数据不能直接在函数外被访问，是因为作用域的关系，上级作用域不能直接访问下级作用域中的数据。</p>
-<p>但是如果反过来，下级作用域可以直接访问上级作用域中的数据。那么如果在函数<code>foo</code>内定义一个函数，那么在这个内部函数中是可以直接访问<code>foo</code>中的<code>num</code>的。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> num = <span class="built_in">Math</span>.random();    </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> num;    </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> func;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> f = foo();</div><div class="line"><span class="comment">// f可以直接访问num，而且多次访问，访问的也是同一个，并不会返回新的num</span></div><div class="line"><span class="keyword">var</span> res1 = f();</div><div class="line"><span class="keyword">var</span> res2 = f();</div></pre></td></tr></table></figure>
-<h3 id="如何获得超过一个数据"><a href="#如何获得超过一个数据" class="headerlink" title="如何获得超过一个数据"></a>如何获得超过一个数据</h3><p>函数的返回值只能有一个，那按照上面的方法，我们只能对函数内部的一个数据进行操作。怎么操作函数内的多个数据呢？</p>
-<p>可以使用对象，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> num1 = <span class="built_in">Math</span>.random();</div><div class="line">    <span class="keyword">var</span> num2 = <span class="built_in">Math</span>.random();</div><div class="line">    <span class="comment">//可以将多个函数包含在一个对象内进行返回，这样就能在函数外部操作当前函数内的多个变量</span></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        num1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> num1;</div><div class="line">        &#125;,</div><div class="line">        num2: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> num2;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="如何完成读取一个数据和修改这个数据"><a href="#如何完成读取一个数据和修改这个数据" class="headerlink" title="如何完成读取一个数据和修改这个数据"></a>如何完成读取一个数据和修改这个数据</h3><p>前面讲的都是如何去获取函数内部的数据，接下来我们考虑如何修改函数内部的数据。</p>
-<p>同样，也是使用内部的函数进行操作。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> num = <span class="built_in">Math</span>.random();</div><div class="line">    <span class="comment">//分别定义get和set函数，使用对象进行返回</span></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="comment">//get_num负责获取数据</span></div><div class="line">        get_num: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;    </div><div class="line">            <span class="keyword">return</span> num;</div><div class="line">        &#125;,</div><div class="line">        <span class="comment">//set_num负责设置数据</span></div><div class="line">        set_num: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">            num = value;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="闭包的基本结构"><a href="#闭包的基本结构" class="headerlink" title="闭包的基本结构"></a>闭包的基本结构</h3><p><strong>一般闭包要解决的的问题就是要想办法间接的获得函数内数据的使用权. 那么我们的可以总结出一个基本的使用模型.</strong></p>
+        <h3 id="什么是递归"><a href="#什么是递归" class="headerlink" title="什么是递归"></a>什么是递归</h3><p>在程序中，所谓的递归，就是函数自己直接或间接的调用自己。调用自己分两种：</p>
 <ol>
-<li>写一个函数, 函数内定义一个新函数, 返回新函数, 用新函数获得函数内的数据</li>
-<li>写一个函数, 函数内定义一个对象, 对象中绑定多个函数( 方法 ), 返回对象, 利用对象的方法访问函数内的数据</li>
+<li><p>直接调用自己</p>
+</li>
+<li><p>间接调用自己</p>
+</li>
 </ol>
+<p>就递归而言最重要的就是跳出结构，因为跳出了才可以有结果.</p>
+<h3 id="化归思想"><a href="#化归思想" class="headerlink" title="化归思想"></a>化归思想</h3><p><strong>化归思想：</strong>将一个问题由难化易，由繁化简，由复杂化简单的过程称为化归，它是转化和归结的简称。</p>
+<p>递归思想就是将一个问题转换为一个已解决的问题来实现</p>
+<p>假如有一个函数<code>f</code>, 如果它是递归函数的话, 那么也就是说函数体内的问题还是转换为 <code>f</code>的形式.</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    ... f( ... ) ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="例子"><a href="#例子" class="headerlink" title="例子:"></a>例子:</h4><blockquote>
+<p>1, 2, 3, 4, 5, …, 100 求和</p>
+</blockquote>
+<ol>
+<li><p>首先假定递归函数已经写好, 假设是<code>foo</code>. 即<code>foo(100)</code>就是求<code>1</code>到<code>100</code>的和</p>
+</li>
+<li><p>寻找递推关系. 就是<code>n</code>与<code>n-1</code>, 或<code>n-2</code>之间的关系:<code>foo( n ) == n + foo( n - 1 )</code></p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> res = foo(<span class="number">100</span>);</div><div class="line"><span class="keyword">var</span> res = foo(<span class="number">99</span>) + <span class="number">100</span>;</div></pre></td></tr></table></figure>
+<p><strong>将递推结构转换为递归体</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">n</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> n + foo( n - <span class="number">1</span> );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>上面就是利用了化归思想：</p>
+<ul>
+<li><p>将 求 100 转换为 求 99</p>
+</li>
+<li><p>将 求 99 转换为 求 98</p>
+</li>
+<li><p>…</p>
+</li>
+<li><p>将求 2 转换为 求 1</p>
+</li>
+<li><p>求 1 结果就是 1</p>
+</li>
+<li><p>即: foo( 1 ) 是 1</p>
+</li>
+</ul>
+<p><strong>将临界条件加到递归体中(求1的结果为1)</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( n == <span class="number">1</span> ) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> n + foo( n - <span class="number">1</span> );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="练习"><a href="#练习" class="headerlink" title="练习:"></a>练习:</h4><blockquote>
+<p>求 1, 3, 5, 7, 9, … 第<code>n</code>项的结果与前<code>n</code>项和. 序号从<code>0</code>开始</p>
+</blockquote>
+<h5 id="先看求第n项"><a href="#先看求第n项" class="headerlink" title="先看求第n项"></a>先看求第<code>n</code>项</h5><ol>
+<li><p>首先假定递归函数已经写好, 假设是<code>fn</code>. 那么第<code>n</code>项就是<code>fn(n)</code></p>
+</li>
+<li><p>找递推关系:<code>fn(n) == f(n-1) + 2</code></p>
+</li>
+<li><p>递归体</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">n</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> fn(n<span class="number">-1</span>) + <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><p>找临界条件</p>
+<ul>
+<li><p>求 n -&gt; n-1</p>
+</li>
+<li><p>求 n-1 -&gt; n-2</p>
+</li>
+<li><p>…</p>
+</li>
+<li><p>求 1 -&gt; 0</p>
+</li>
+<li><p>求 第 0 项, 就是 1</p>
+</li>
+</ul>
+</li>
+<li><p>加入临界条件</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( n == <span class="number">0</span> ) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> fn( n<span class="number">-1</span> ) + <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="再看求前n项和"><a href="#再看求前n项和" class="headerlink" title="再看求前n项和"></a>再看求前<code>n</code>项和</h5><ol>
+<li><p>假设已完成, sum( n ) 就是前 n 项和</p>
+</li>
+<li><p>找递推关系: 前 n 项和 等于 第 n 项 + 前 n-1 项的和</p>
+</li>
+<li><p>递归体</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> fn( n ) + sum( n - <span class="number">1</span> );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<ol>
+<li><p>找临界条件</p>
+<ul>
+<li><code>n == 1</code>结果为 1</li>
+</ul>
+</li>
+<li><p>加入临界条件</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> fn(n) + sum(n - <span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="练习-1"><a href="#练习-1" class="headerlink" title="练习"></a>练习</h4><blockquote>
+<p>2, 4, 6, 8, 10 第 n 项与 前 n 项和</p>
+</blockquote>
+<p>解题方法和上一题一样。</p>
+<h4 id="练习-2"><a href="#练习-2" class="headerlink" title="练习"></a>练习</h4><blockquote>
+<p>现有数列: 1, 1, 2, 4, 7, 11, 16, … 求 第 n 项, 求前 n 项和.</p>
+</blockquote>
+<h5 id="求第n项"><a href="#求第n项" class="headerlink" title="求第n项"></a>求第<code>n</code>项</h5><ol>
+<li><p>假设已经得到结果 fn, fn( 10 ) 就是第 10 项</p>
+</li>
+<li><p>找递推关系</p>
+<ul>
+<li><p>0, 1 =&gt; fn( 0 ) + 0 = fn( 1 )</p>
+</li>
+<li><p>1, 2 =&gt; fn( 1 ) + 1 = fn( 2 )</p>
+</li>
+<li><p>2, 3 =&gt; fn( 2 ) + 2 = fn( 3 )</p>
+</li>
+<li><p>…</p>
+</li>
+<li><p>n-1, n =&gt; fn( n-1 ) + n - 1 = fn( n )</p>
+</li>
+</ul>
+</li>
+<li><p>递归体也就清楚了</p>
+</li>
+<li><p>临界条件是 n == 0 =&gt; 1</p>
+</li>
+</ol>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( n == <span class="number">0</span> ) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> fn( n<span class="number">-1</span> ) + n - <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="前n项和"><a href="#前n项和" class="headerlink" title="前n项和"></a>前<code>n</code>项和</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( n == <span class="number">0</span> ) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> sum( n - <span class="number">1</span> ) + fn( n );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="练习-3"><a href="#练习-3" class="headerlink" title="练习"></a>练习</h4><blockquote>
+<p>Fibonacci 数列: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, … 求其第 n 项.</p>
+</blockquote>
+<p>递推关系:<code>fn(n) == fn(n-1) + fn(n - 2)</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fib</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( n == <span class="number">0</span> || n == <span class="number">1</span> ) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> fib( n - <span class="number">1</span> ) + fib( n - <span class="number">2</span> );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="练习-4"><a href="#练习-4" class="headerlink" title="练习"></a>练习</h4><blockquote>
+<p>阶乘：一个数字的阶乘表示的是从 1 开始 累乘到这个数字. 例如 3! 表示 1 <em> 2 </em> 3. 5! 就是 1 <em> 2 </em> 3 <em> 4 </em> 5. 规定 0 没有阶乘, 阶乘从1开始。</p>
+</blockquote>
+<p>求n的阶乘</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( n == <span class="number">1</span> ) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> foo( n - <span class="number">1</span> ) * n;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h4 id="练习-5"><a href="#练习-5" class="headerlink" title="练习"></a>练习</h4><blockquote>
+<p>求幂</p>
+</blockquote>
+<ul>
+<li><p>求幂就是求 某一个数 几次方</p>
+</li>
+<li><p>2*2 2 的 平方, 2 的 2 次方</p>
+</li>
+<li><p>求 n 的 m 次方</p>
+</li>
+<li><p>最终要得到一个函数 power( n, m )</p>
+</li>
+<li><p>n 的 m 次方就是 m 个 n 相乘 即 n 乘以 (m-1) 个 n 相乘</p>
+</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">power</span> (<span class="params"> n, m </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( m == <span class="number">1</span> ) <span class="keyword">return</span> n;</div><div class="line">    <span class="keyword">return</span> power( n, m - <span class="number">1</span> ) * n;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
 
@@ -275,7 +428,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/12/闭包/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/04/01/递归/">展开全文 >></a>
         </p>
       
 
