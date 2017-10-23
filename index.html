@@ -6,17 +6,17 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Hexo</title>
+  <title>A fish in the sea</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta property="og:type" content="website">
-<meta property="og:title" content="Hexo">
+<meta property="og:title" content="A fish in the sea">
 <meta property="og:url" content="http://yoursite.com/index.html">
-<meta property="og:site_name" content="Hexo">
+<meta property="og:site_name" content="A fish in the sea">
 <meta property="og:locale" content="zh-Hans">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Hexo">
+<meta name="twitter:title" content="A fish in the sea">
   
-    <link rel="alternative" href="/atom.xml" title="Hexo" type="application/atom+xml">
+    <link rel="alternative" href="/atom.xml" title="A fish in the sea" type="application/atom+xml">
   
   
     <link rel="icon" href="/favicon.png">
@@ -48,6 +48,8 @@
 		<hgroup>
 		  <h1 class="header-author"><a href="">Fish</a></h1>
 		</hgroup>
+		
+		<p class="header-subtitle">平淡而充实,诚恳而勤勉.</p>
 		
 
 		<nav class="header-menu">
@@ -103,6 +105,8 @@
 			  <h1 class="header-author js-header-author">Fish</h1>
 			</hgroup>
 			
+			<p class="header-subtitle"><i class="icon icon-quo-left"></i>平淡而充实,诚恳而勤勉.<i class="icon icon-quo-right"></i></p>
+			
 			
 			
 				
@@ -145,6 +149,190 @@
           </div>
           <div id="js-content" class="content-ll">
             
+  
+    <article id="post-CSS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/10/17/CSS/">让盒子居中的四种方法</a>
+    </h1>
+  
+
+        
+        <a href="/2017/10/17/CSS/" class="archive-article-date">
+  	<time datetime="2017-10-17T13:04:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##让盒子居中的方法</p>
+<p>###第一种方法position+margin</p>
+<pre><code>#box{
+
+        position: fixed;(也可以是absolute)
+        left : 50%;
+        margin-left: -盒子宽度的一半;
+        top:50%;
+        margin-top: -盒子高度的一半;
+    }
+</code></pre><p>###第二种方法position+margin的第二种方式</p>
+<pre><code>#box{
+
+       position: fixed;(也可以是absolute)
+       top:0;
+       left: 0;
+       right: 0;
+       bottom:0;
+       margin: auto;
+   }
+</code></pre><p>###第三种方法需要借助伪元素来撑开高度</p>
+<pre><code>html,body{
+       height:100%;
+   }
+   body{
+       text-align: center;
+   }
+   body::before{
+       /* 必备属性 */
+       content : &apos;&apos;;
+       display: inline-block;
+       height:100%;
+       vertical-align: middle;
+   }
+   #box{
+       vertical-align: middle;
+       display: inline-block;
+   }
+</code></pre><p>###第四种方法伸缩盒子布局<br>     html,body{<br>            height: 100%;<br>        }<br>        body{<br>            /<em> 开启伸缩盒子 </em>/<br>            display: flex;</p>
+<pre><code>    /* (主轴)水平方向对齐 */
+    justify-content: center;
+    /* （侧轴）垂直方向对齐 */
+    align-items: center;
+}
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/10/17/CSS/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-对象的动态特性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/12/对象的动态特性/">对象的动态特性</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/12/对象的动态特性/" class="archive-article-date">
+  	<time datetime="2017-05-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-12</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>##1、给对象动态添加属性</p>
+<p>当一个对象需要某个属性的时候，可以用两种方式为其添加属性</p>
+<ul>
+<li>直接使用<code>对象名.属性名 = 值</code>这种形式，为对象添加对应的属性。</li>
+<li>使用关联数组语法<code>对象名[&quot;属性名&quot;] = 值</code>这种形式，为对象添加对应的属性</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//o是一个没有任何自定义属性的对象</span></div><div class="line"><span class="keyword">var</span> o = &#123;&#125;;</div><div class="line"></div><div class="line"><span class="comment">//现在想让他拥有name age gender等属性</span></div><div class="line"><span class="comment">//直接使用 对象名.属性名 = 值</span></div><div class="line">o.name = <span class="string">"张三"</span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//使用 对象名["属性名"] = 值</span></div><div class="line">o[<span class="string">"age"</span>] = <span class="number">18</span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//可以通过打印查看效果</span></div><div class="line"><span class="built_in">console</span>.log(o.name);</div><div class="line"><span class="built_in">console</span>.log(o.age);</div></pre></td></tr></table></figure>
+<p><strong><em>注意：</em></strong></p>
+<p>当要动态的为一个对象添加属性的时候，必须使用关联数组的方式。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//接收到了用户的输入</span></div><div class="line"><span class="keyword">var</span> str = prompt(<span class="string">"请输入属性名"</span>);</div><div class="line"></div><div class="line">o = &#123;&#125;;</div><div class="line"><span class="comment">//o.str = "这是一个新属性"; //这么写是不对的，会给对象新增一个str属性</span></div><div class="line"><span class="comment">//正确的写法如下</span></div><div class="line">o[str]=<span class="string">"这是一个新属性"</span>;</div></pre></td></tr></table></figure>
+<p>##2、对象属性的访问形式</p>
+<ul>
+<li>点语法：<code>对象名.属性名</code></li>
+<li>关联数组：<code>对象名[属性名]</code></li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">    name:<span class="string">"张三"</span>,</div><div class="line">    sayHello:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"你好，我叫"</span>+ <span class="keyword">this</span>.name);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//点语法</span></div><div class="line"><span class="built_in">console</span>.log(o.name);</div><div class="line"></div><div class="line"><span class="comment">//关联数组语法</span></div><div class="line"><span class="built_in">console</span>.log(o[<span class="string">"name"</span>]);</div><div class="line"></div><div class="line"><span class="comment">//这两种用法同样适用于方法</span></div><div class="line">o.sayHello();</div><div class="line">o[<span class="string">"sayHello"</span>]();</div><div class="line"></div><div class="line"><span class="comment">//可以对这个对象的属性进行遍历，如果是值就打印，如果是方法就调用</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> o)&#123;</div><div class="line">    <span class="keyword">if</span> ( <span class="keyword">typeof</span> o[ k ] == <span class="string">'function'</span> ) &#123;</div><div class="line">        o[ k ]();</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log( <span class="string">'log: '</span> + o[ k ] );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/12/对象的动态特性/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
   
     <article id="post-闭包" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
@@ -360,10 +548,6 @@
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> fn(n) + sum(n - <span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h4 id="练习-1"><a href="#练习-1" class="headerlink" title="练习"></a>练习</h4><blockquote>
-<p>2, 4, 6, 8, 10 第 n 项与 前 n 项和</p>
-</blockquote>
-<p>解题方法和上一题一样。</p>
-<h4 id="练习-2"><a href="#练习-2" class="headerlink" title="练习"></a>练习</h4><blockquote>
 <p>现有数列: 1, 1, 2, 4, 7, 11, 16, … 求 第 n 项, 求前 n 项和.</p>
 </blockquote>
 <h5 id="求第n项"><a href="#求第n项" class="headerlink" title="求第n项"></a>求第<code>n</code>项</h5><ol>
@@ -390,32 +574,16 @@
 </ol>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( n == <span class="number">0</span> ) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> fn( n<span class="number">-1</span> ) + n - <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h5 id="前n项和"><a href="#前n项和" class="headerlink" title="前n项和"></a>前<code>n</code>项和</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( n == <span class="number">0</span> ) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> sum( n - <span class="number">1</span> ) + fn( n );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="练习-3"><a href="#练习-3" class="headerlink" title="练习"></a>练习</h4><blockquote>
+<h4 id="练习-2"><a href="#练习-2" class="headerlink" title="练习"></a>练习</h4><blockquote>
 <p>Fibonacci 数列: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, … 求其第 n 项.</p>
 </blockquote>
 <p>递推关系:<code>fn(n) == fn(n-1) + fn(n - 2)</code></p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fib</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( n == <span class="number">0</span> || n == <span class="number">1</span> ) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> fib( n - <span class="number">1</span> ) + fib( n - <span class="number">2</span> );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="练习-4"><a href="#练习-4" class="headerlink" title="练习"></a>练习</h4><blockquote>
+<h4 id="练习-3"><a href="#练习-3" class="headerlink" title="练习"></a>练习</h4><blockquote>
 <p>阶乘：一个数字的阶乘表示的是从 1 开始 累乘到这个数字. 例如 3! 表示 1 <em> 2 </em> 3. 5! 就是 1 <em> 2 </em> 3 <em> 4 </em> 5. 规定 0 没有阶乘, 阶乘从1开始。</p>
 </blockquote>
 <p>求n的阶乘</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( n == <span class="number">1</span> ) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> foo( n - <span class="number">1</span> ) * n;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="练习-5"><a href="#练习-5" class="headerlink" title="练习"></a>练习</h4><blockquote>
-<p>求幂</p>
-</blockquote>
-<ul>
-<li><p>求幂就是求 某一个数 几次方</p>
-</li>
-<li><p>2*2 2 的 平方, 2 的 2 次方</p>
-</li>
-<li><p>求 n 的 m 次方</p>
-</li>
-<li><p>最终要得到一个函数 power( n, m )</p>
-</li>
-<li><p>n 的 m 次方就是 m 个 n 相乘 即 n 乘以 (m-1) 个 n 相乘</p>
-</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">power</span> (<span class="params"> n, m </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( m == <span class="number">1</span> ) <span class="keyword">return</span> n;</div><div class="line">    <span class="keyword">return</span> power( n, m - <span class="number">1</span> ) * n;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<p>function foo ( n ) {<br>    if ( n == 1 ) return 1;<br>    return foo( n - 1 ) * n;<br>}</p>
 
       
 
