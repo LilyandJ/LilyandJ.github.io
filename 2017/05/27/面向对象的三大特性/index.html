@@ -6,15 +6,19 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives: 2017/5 | A fish in the sea</title>
+  <title>面向对象的三大特性 | A fish in the sea</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="A fish in the sea">
-<meta property="og:url" content="http://yoursite.com/archives/2017/05/index.html">
+  <meta name="description" content="#面向对象的三大特性 ###所有面向对象的语言都具备三大特性。分别是：封装、继承和多态。因为上一篇文章讲述了“继承”,所以这次主要说明的是封装和多态。 ##封装    1)什么是封装        a. 将不想公开的属性进行私有化，外面无法访问和读取        b. 可以提供特权方法允许别人读或写相应的数据（setter、getter）        c. 使用闭包将所有类的定义（构造函数、原">
+<meta property="og:type" content="article">
+<meta property="og:title" content="面向对象的三大特性">
+<meta property="og:url" content="http://yoursite.com/2017/05/27/面向对象的三大特性/index.html">
 <meta property="og:site_name" content="A fish in the sea">
+<meta property="og:description" content="#面向对象的三大特性 ###所有面向对象的语言都具备三大特性。分别是：封装、继承和多态。因为上一篇文章讲述了“继承”,所以这次主要说明的是封装和多态。 ##封装    1)什么是封装        a. 将不想公开的属性进行私有化，外面无法访问和读取        b. 可以提供特权方法允许别人读或写相应的数据（setter、getter）        c. 使用闭包将所有类的定义（构造函数、原">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-10-25T02:57:02.012Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="A fish in the sea">
+<meta name="twitter:title" content="面向对象的三大特性">
+<meta name="twitter:description" content="#面向对象的三大特性 ###所有面向对象的语言都具备三大特性。分别是：封装、继承和多态。因为上一篇文章讲述了“继承”,所以这次主要说明的是封装和多态。 ##封装    1)什么是封装        a. 将不想公开的属性进行私有化，外面无法访问和读取        b. 可以提供特权方法允许别人读或写相应的数据（setter、getter）        c. 使用闭包将所有类的定义（构造函数、原">
   
     <link rel="alternative" href="/atom.xml" title="A fish in the sea" type="application/atom+xml">
   
@@ -148,157 +152,203 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
+            <article id="post-面向对象的三大特性" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
   
+    <h1 class="article-title" itemprop="name">
+      面向对象的三大特性
+    </h1>
   
-    
-    
-      
-      
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/27/面向对象的三大特性/" class="archive-article-date">
+
+        
+        <a href="/2017/05/27/面向对象的三大特性/" class="archive-article-date">
   	<time datetime="2017-05-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-27</time>
 </a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/27/面向对象的三大特性/">面向对象的三大特性</a>
-    </h1>
-  
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#面向对象的三大特性</p>
+<p>###所有面向对象的语言都具备三大特性。分别是：封装、继承和多态。<br>因为上一篇文章讲述了<strong>“继承”</strong>,所以这次主要说明的是封装和多态。</p>
+<p>##封装<br>    1)什么是封装<br>        a. 将不想公开的属性进行私有化，外面无法访问和读取<br>        b. 可以提供特权方法允许别人读或写相应的数据（setter、getter）<br>        c. 使用闭包将所有类的定义（构造函数、原型、静态方法）统筹起来，暴露类的名称延缓资源回收<br>    eg:<br>    //创建一个类<br>            function Person(name,age){<br>                this.name=name;<br>                //this.age=age;<br>                var age=age; //私有化了一个年龄属性<br>                this.show=function(){<br>                    console.log(this.name + ‘年龄：’+age+’岁’); //内部可以访问私有化的属性<br>                }<br>            }</p>
+<pre><code>        //根据类创建实例
+        var p1=new Person(&apos;张辽&apos;,19);
+        p1.show();
+        p1.name=&apos;小乔&apos;;
+        p1.show();
 
-        <div class="article-info info-on-right">
-          
-          
+        console.log(p1.age); //年龄已经私有化不允许直接访问
+2)闭包实现封装写法
+    (fucntion(){
+        function Person(name,age){
+            this.name=name;
+            var _age=age; //将变量设置成为局部变量，外界无法访问
+            this.getAge=function(){ //提供特权方法供外外界读取年龄
+                return _age;
+            }
+        }
 
+        Person.prototype.show=function(){}
+        Person.prototype.run=function(){}
+        Person.prototype={
+            show:function(){
+            },
+            run:function(){
+            }
+        };
+
+        //静态方法： 不依赖于对象调用，直接使用类名进行调用。如： Math.ceil() $.each()
+        Person.run=function(){}
+
+        //将类暴露到全局上
+        window.Person=Person;
+    })();
+</code></pre><p>##多态</p>
+<p>######JS的函数重载<br>这个是多态的基础，在之前的Javascript入门已经说过了，JS函数不支持多态，但是事实上JS函数是无态的，支持任意长度，类型的参数列表。如果同时定义了多个同名函数，则以最后一个函数为准。</p>
+<p>######多态基本概念<br>可以理解为多种状态，根据用户的参数个数、类型、不同的值等差异的特征体现出不同的功能(如:传不同的对象进入函数，体现出不一样的结果，就叫多态)</p>
+<p>eg:本人家里养了一只鸡，一只鸭。当主人向他们发出‘叫’的命令时。鸭子会嘎嘎的叫，而鸡会咯咯的叫。转化成代码形式如下</p>
+<pre><code>var makeSound = function(animal) {
+    if(animal instanceof Duck) {
+            console.log(&apos;嘎嘎嘎&apos;);
+    } else if (animal instanceof Chicken) {
+        console.log(&apos;咯咯咯&apos;);
+    }
+}
+var Duck = function(){}
+var Chiken = function() {};
+makeSound(new Chicken());
+makeSound(new Duck());
+
+
+多态的代码示例
+
+var makeSound = function(animal) {
+    animal.sound();
+}
+
+var Duck = function(){}
+Duck.prototype.sound = function() {
+    console.log(&apos;嘎嘎嘎&apos;)
+}
+var Chiken = function() {};
+Chiken.prototype.sound = function() {
+    console.log(&apos;咯咯咯&apos;)
+}
+
+makeSound(new Chicken());
+makeSound(new Duck());
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/05/27/面向对象的三大特性/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/24/继承/" class="archive-article-date">
-  	<time datetime="2017-05-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-24</time>
-</a>
+<nav id="article-nav">
+  
+  
+    <a href="/2017/05/24/继承/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">聊聊&#39;继承&#39;这一回事</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/24/继承/">聊聊&#39;继承&#39;这一回事</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/19/this关键字/" class="archive-article-date">
-  	<time datetime="2017-05-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-19</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/19/this关键字/">this关键字的5种形式</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/17/CSS/" class="archive-article-date">
-  	<time datetime="2017-05-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-17</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/17/CSS/">让盒子居中的四种方法</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/12/对象的动态特性/" class="archive-article-date">
-  	<time datetime="2017-05-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/12/对象的动态特性/">对象的动态特性</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
-  
-
-    
 
 
           </div>
@@ -321,8 +371,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,

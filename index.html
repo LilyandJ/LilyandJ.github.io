@@ -150,6 +150,328 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-面向对象的三大特性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/27/面向对象的三大特性/">面向对象的三大特性</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/27/面向对象的三大特性/" class="archive-article-date">
+  	<time datetime="2017-05-26T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#面向对象的三大特性</p>
+<p>###所有面向对象的语言都具备三大特性。分别是：封装、继承和多态。<br>因为上一篇文章讲述了<strong>“继承”</strong>,所以这次主要说明的是封装和多态。</p>
+<p>##封装<br>    1)什么是封装<br>        a. 将不想公开的属性进行私有化，外面无法访问和读取<br>        b. 可以提供特权方法允许别人读或写相应的数据（setter、getter）<br>        c. 使用闭包将所有类的定义（构造函数、原型、静态方法）统筹起来，暴露类的名称延缓资源回收<br>    eg:<br>    //创建一个类<br>            function Person(name,age){<br>                this.name=name;<br>                //this.age=age;<br>                var age=age; //私有化了一个年龄属性<br>                this.show=function(){<br>                    console.log(this.name + ‘年龄：’+age+’岁’); //内部可以访问私有化的属性<br>                }<br>            }</p>
+<pre><code>        //根据类创建实例
+        var p1=new Person(&apos;张辽&apos;,19);
+        p1.show();
+        p1.name=&apos;小乔&apos;;
+        p1.show();
+
+        console.log(p1.age); //年龄已经私有化不允许直接访问
+2)闭包实现封装写法
+    (fucntion(){
+        function Person(name,age){
+            this.name=name;
+            var _age=age; //将变量设置成为局部变量，外界无法访问
+            this.getAge=function(){ //提供特权方法供外外界读取年龄
+                return _age;
+            }
+        }
+
+        Person.prototype.show=function(){}
+        Person.prototype.run=function(){}
+        Person.prototype={
+            show:function(){
+            },
+            run:function(){
+            }
+        };
+
+        //静态方法： 不依赖于对象调用，直接使用类名进行调用。如： Math.ceil() $.each()
+        Person.run=function(){}
+
+        //将类暴露到全局上
+        window.Person=Person;
+    })();
+</code></pre><p>##多态</p>
+<p>######JS的函数重载<br>这个是多态的基础，在之前的Javascript入门已经说过了，JS函数不支持多态，但是事实上JS函数是无态的，支持任意长度，类型的参数列表。如果同时定义了多个同名函数，则以最后一个函数为准。</p>
+<p>######多态基本概念<br>可以理解为多种状态，根据用户的参数个数、类型、不同的值等差异的特征体现出不同的功能(如:传不同的对象进入函数，体现出不一样的结果，就叫多态)</p>
+<p>eg:本人家里养了一只鸡，一只鸭。当主人向他们发出‘叫’的命令时。鸭子会嘎嘎的叫，而鸡会咯咯的叫。转化成代码形式如下</p>
+<pre><code>var makeSound = function(animal) {
+    if(animal instanceof Duck) {
+            console.log(&apos;嘎嘎嘎&apos;);
+    } else if (animal instanceof Chicken) {
+        console.log(&apos;咯咯咯&apos;);
+    }
+}
+var Duck = function(){}
+var Chiken = function() {};
+makeSound(new Chicken());
+makeSound(new Duck());
+
+
+多态的代码示例
+
+var makeSound = function(animal) {
+    animal.sound();
+}
+
+var Duck = function(){}
+Duck.prototype.sound = function() {
+    console.log(&apos;嘎嘎嘎&apos;)
+}
+var Chiken = function() {};
+Chiken.prototype.sound = function() {
+    console.log(&apos;咯咯咯&apos;)
+}
+
+makeSound(new Chicken());
+makeSound(new Duck());
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/27/面向对象的三大特性/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-继承" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/24/继承/">聊聊&#39;继承&#39;这一回事</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/24/继承/" class="archive-article-date">
+  	<time datetime="2017-05-23T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-24</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#聊聊’继承’这一回事</p>
+<h5 id="继承作为面向对象的三大特性之一-它的重要性不言而论-但在深入了解’继承’之前-我们必须先搞清楚一下两个问题"><a href="#继承作为面向对象的三大特性之一-它的重要性不言而论-但在深入了解’继承’之前-我们必须先搞清楚一下两个问题" class="headerlink" title="继承作为面向对象的三大特性之一,它的重要性不言而论,但在深入了解’继承’之前,我们必须先搞清楚一下两个问题:"></a>继承作为面向对象的三大特性之一,它的重要性不言而论,但在深入了解’继承’之前,我们必须先搞清楚一下两个问题:</h5><pre><code>1.什么是继承?
+2.继承的目的是?
+</code></pre><p>######现在让我们来解开’继承’这一神秘的面纱吧</p>
+<p>###什么是继承?<br>        继承就是一种对原始类型（父类）进行细化、扩展的一个过程</p>
+<p>###继承的目的?<br>        让子类拥有父类的所有属性和方法，避免重复劳动</p>
+<p>继承的核心在于让子类拥有父类的一切特征。那么在父类之后定义子类，分别具备父类的原生和原型部分的所有特征。这种我们称为<strong>‘对象伪造’</strong><br>这种方式虽然搞定了子类的特性问题，但是并不被JavaScript引擎推崇.</p>
+<p>######实现步骤：<br>    1、找到（声明）父类<br>    2、创建子类，构造器中继承父类所有原生属性<br>    3、子类原型，拷贝父类原型<br>而Javascript的继承是基于原型链的继承。</p>
+<p>##JS实现继承三句：</p>
+<pre><code>1. 子类的原型等于父类原型创建出来的实例
+Student.prototype=Object.create(Person.prototype);
+
+2. 让子类拥有父类的所有属性，子类的构造函数调用父类的构造函数
+    Person.apply(this,arguments);
+
+3. 找回被替换掉的构造函数
+     Student.prototype.contructor=Student;
+eg:
+//定义父类
+    function Person(name,age){
+        this.name=name;
+        this.age=age;
+    }
+    Person.prototype.run=function(){
+        console.log(this.name + &apos;跑步速度每小时80公里&apos;);
+    }
+
+    //定义子类
+    function Student(name,age,sno){
+        this.sno=sno;
+        //this === 实例出来的对象
+        Person.apply(this,arguments);
+        //使用arguments实现传参时，必须将子类独有的参数放在后面
+    }
+
+
+    //真正的继承：子类原型是父类原型的实例
+    Student.prototype=Object.create(Person.prototype);
+
+    //找回被替换掉的构造函数
+    Student.prototype.contructor=Student;
+
+    //先继承再扩展
+    Student.prototype.study=function(){
+        console.log(this.name+&apos;正在学习，准备考个清华大学&apos;);
+    }
+
+    //实例化对象
+    var s1=new Student(&apos;小明&apos;,11,&apos;001&apos;);
+    s1.study();
+    s1.run();
+
+    console.log(s1 instanceof Student);
+    console.log(s1 instanceof Person);
+
+    console.log(s1);
+</code></pre><p>希望以上内容对你能有所帮助,谢谢.</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/24/继承/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-this关键字" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/05/19/this关键字/">this关键字的5种形式</a>
+    </h1>
+  
+
+        
+        <a href="/2017/05/19/this关键字/" class="archive-article-date">
+  	<time datetime="2017-05-18T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-19</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#this关键字</p>
+<h2 id="全局this"><a href="#全局this" class="headerlink" title="全局this"></a>全局this</h2><pre><code>全局this一般指向全局对象，浏览器中的全局对象就是 window
+</code></pre><p>##函数this<br>    一般函数的this ，由window调用，this就指向window对象。<br>    function show(){<br>                console.log(this); //谁调用函数，函数中的this就指向谁<br>            }</p>
+<pre><code>window.show();
+</code></pre><p>##对象函数this<br>    this===对象本身 ，原则：谁调用我，this就指向谁<br>    var obj=new Object();<br>            obj.name=’张三疯’;<br>            obj.show=function(){<br>                console.log(this.name,this);<br>            }<br>            obj.show();//this代表obj对象本身</p>
+<p>##构造器上的this<br>    使用new关键字构造时，默认都指向当前新创建的对象。<br>    this===new关键词实例化出来的对象<br>    function Person(name,age){<br>                this.name=name;<br>                this.age=age;<br>                console.log(this); //代表的是对象本身<br>            }</p>
+<pre><code>var p1=new Person(&apos;李黑&apos;,18);
+var p2=new Person(&apos;李白&apos;,19);
+</code></pre><p>##借来的this<br>    所有的函数 Function都拥有以下几个默认方法(call,apply,bind共同的作用是：改变函数内this的指向)，将函数放在另外一个对象的上下文环境中去执行。<br>        理解：函数可以交给另外一个对象去调用<br>                  函数.call(对象,参数1,参数2,参数n);<br>                  函数.apply(对象,[参数1,参数2,参数n]); //【常用】可以使用arguments<br>            .call方法写参数时直接并列在后面，.apply的参数是以数组形式传递</p>
+<pre><code>回调函数.bind(对象,参数1,参数2,参数n); //被动的改变回调函数的this指向
+</code></pre>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/05/19/this关键字/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-CSS" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -157,13 +479,13 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/10/17/CSS/">让盒子居中的四种方法</a>
+      <a class="article-title" href="/2017/05/17/CSS/">让盒子居中的四种方法</a>
     </h1>
   
 
         
-        <a href="/2017/10/17/CSS/" class="archive-article-date">
-  	<time datetime="2017-10-17T13:04:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-10-17</time>
+        <a href="/2017/05/17/CSS/" class="archive-article-date">
+  	<time datetime="2017-05-16T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-17</time>
 </a>
         
       </header>
@@ -226,7 +548,7 @@
 
       
         <p class="article-more-link">
-          <a class="article-more-a" href="/2017/10/17/CSS/">展开全文 >></a>
+          <a class="article-more-a" href="/2017/05/17/CSS/">展开全文 >></a>
         </p>
       
 
