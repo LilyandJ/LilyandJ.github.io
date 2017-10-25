@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="A fish in the sea">
 <meta property="og:description" content="#面向对象的三大特性 ###所有面向对象的语言都具备三大特性。分别是：封装、继承和多态。因为上一篇文章讲述了“继承”,所以这次主要说明的是封装和多态。 ##封装    1)什么是封装        a. 将不想公开的属性进行私有化，外面无法访问和读取        b. 可以提供特权方法允许别人读或写相应的数据（setter、getter）        c. 使用闭包将所有类的定义（构造函数、原">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-25T02:57:02.012Z">
+<meta property="og:updated_time" content="2017-10-25T06:28:27.559Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="面向对象的三大特性">
 <meta name="twitter:description" content="#面向对象的三大特性 ###所有面向对象的语言都具备三大特性。分别是：封装、继承和多态。因为上一篇文章讲述了“继承”,所以这次主要说明的是封装和多态。 ##封装    1)什么是封装        a. 将不想公开的属性进行私有化，外面无法访问和读取        b. 可以提供特权方法允许别人读或写相应的数据（setter、getter）        c. 使用闭包将所有类的定义（构造函数、原">
@@ -174,7 +174,7 @@
       
         <p>#面向对象的三大特性</p>
 <p>###所有面向对象的语言都具备三大特性。分别是：封装、继承和多态。<br>因为上一篇文章讲述了<strong>“继承”</strong>,所以这次主要说明的是封装和多态。</p>
-<p>##封装<br>    1)什么是封装<br>        a. 将不想公开的属性进行私有化，外面无法访问和读取<br>        b. 可以提供特权方法允许别人读或写相应的数据（setter、getter）<br>        c. 使用闭包将所有类的定义（构造函数、原型、静态方法）统筹起来，暴露类的名称延缓资源回收<br>    eg:<br>    //创建一个类<br>            function Person(name,age){<br>                this.name=name;<br>                //this.age=age;<br>                var age=age; //私有化了一个年龄属性<br>                this.show=function(){<br>                    console.log(this.name + ‘年龄：’+age+’岁’); //内部可以访问私有化的属性<br>                }<br>            }</p>
+<p>##封装<br>    1)什么是封装<br>        a. 将不想公开的属性进行私有化，外面无法访问和读取<br>        b. 可以提供特权方法允许别人读或写相应的数据（setter、getter）<br>        c. 使用闭包将所有类的定义（构造函数、原型、静态方法）统筹起来，暴露类的名称延缓资源回收<br><a id="more"></a><br>    eg:<br>    //创建一个类<br>            function Person(name,age){<br>                this.name=name;<br>                //this.age=age;<br>                var age=age; //私有化了一个年龄属性<br>                this.show=function(){<br>                    console.log(this.name + ‘年龄：’+age+’岁’); //内部可以访问私有化的属性<br>                }<br>            }</p>
 <pre><code>        //根据类创建实例
         var p1=new Person(&apos;张辽&apos;,19);
         p1.show();
@@ -209,8 +209,7 @@
     })();
 </code></pre><p>##多态</p>
 <p>######JS的函数重载<br>这个是多态的基础，在之前的Javascript入门已经说过了，JS函数不支持多态，但是事实上JS函数是无态的，支持任意长度，类型的参数列表。如果同时定义了多个同名函数，则以最后一个函数为准。</p>
-<p>######多态基本概念<br>可以理解为多种状态，根据用户的参数个数、类型、不同的值等差异的特征体现出不同的功能(如:传不同的对象进入函数，体现出不一样的结果，就叫多态)</p>
-<p>eg:本人家里养了一只鸡，一只鸭。当主人向他们发出‘叫’的命令时。鸭子会嘎嘎的叫，而鸡会咯咯的叫。转化成代码形式如下</p>
+<p>######多态基本概念<br>可以理解为多种状态，根据用户的参数个数、类型、不同的值等差异的特征体现出不同的功能(如:传不同的对象进入函数，体现出不一样的结果，就叫多态)<br><!--more--><br>eg:本人家里养了一只鸡，一只鸭。当主人向他们发出‘叫’的命令时。鸭子会嘎嘎的叫，而鸡会咯咯的叫。转化成代码形式如下</p>
 <pre><code>var makeSound = function(animal) {
     if(animal instanceof Duck) {
             console.log(&apos;嘎嘎嘎&apos;);
@@ -339,6 +338,26 @@ makeSound(new Duck());
 </aside>
 
 
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="面向对象的三大特性" data-title="面向对象的三大特性" data-url="http://yoursite.com/2017/05/27/面向对象的三大特性/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ture"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
   
   

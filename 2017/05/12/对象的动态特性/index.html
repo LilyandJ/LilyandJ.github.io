@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>对象的动态特性 | A fish in the sea</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="##1、给对象动态添加属性 当一个对象需要某个属性的时候，可以用两种方式为其添加属性  直接使用对象名.属性名 = 值这种形式，为对象添加对应的属性。 使用关联数组语法对象名[&amp;quot;属性名&amp;quot;] = 值这种形式，为对象添加对应的属性  1234567891011121314151617//o是一个没有任何自定义属性的对象var o = &amp;#123;&amp;#125;;//现在想让他拥有na">
+  <meta name="description" content="##1、给对象动态添加属性 当一个对象需要某个属性的时候，可以用两种方式为其添加属性  直接使用对象名.属性名 = 值这种形式，为对象添加对应的属性。 使用关联数组语法对象名[&amp;quot;属性名&amp;quot;] = 值这种形式，为对象添加对应的属性">
 <meta property="og:type" content="article">
 <meta property="og:title" content="对象的动态特性">
 <meta property="og:url" content="http://yoursite.com/2017/05/12/对象的动态特性/index.html">
 <meta property="og:site_name" content="A fish in the sea">
-<meta property="og:description" content="##1、给对象动态添加属性 当一个对象需要某个属性的时候，可以用两种方式为其添加属性  直接使用对象名.属性名 = 值这种形式，为对象添加对应的属性。 使用关联数组语法对象名[&amp;quot;属性名&amp;quot;] = 值这种形式，为对象添加对应的属性  1234567891011121314151617//o是一个没有任何自定义属性的对象var o = &amp;#123;&amp;#125;;//现在想让他拥有na">
+<meta property="og:description" content="##1、给对象动态添加属性 当一个对象需要某个属性的时候，可以用两种方式为其添加属性  直接使用对象名.属性名 = 值这种形式，为对象添加对应的属性。 使用关联数组语法对象名[&amp;quot;属性名&amp;quot;] = 值这种形式，为对象添加对应的属性">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-17T12:58:53.432Z">
+<meta property="og:updated_time" content="2017-10-25T06:27:52.307Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="对象的动态特性">
-<meta name="twitter:description" content="##1、给对象动态添加属性 当一个对象需要某个属性的时候，可以用两种方式为其添加属性  直接使用对象名.属性名 = 值这种形式，为对象添加对应的属性。 使用关联数组语法对象名[&amp;quot;属性名&amp;quot;] = 值这种形式，为对象添加对应的属性  1234567891011121314151617//o是一个没有任何自定义属性的对象var o = &amp;#123;&amp;#125;;//现在想让他拥有na">
+<meta name="twitter:description" content="##1、给对象动态添加属性 当一个对象需要某个属性的时候，可以用两种方式为其添加属性  直接使用对象名.属性名 = 值这种形式，为对象添加对应的属性。 使用关联数组语法对象名[&amp;quot;属性名&amp;quot;] = 值这种形式，为对象添加对应的属性">
   
     <link rel="alternative" href="/atom.xml" title="A fish in the sea" type="application/atom+xml">
   
@@ -176,9 +176,10 @@
 <p>当一个对象需要某个属性的时候，可以用两种方式为其添加属性</p>
 <ul>
 <li>直接使用<code>对象名.属性名 = 值</code>这种形式，为对象添加对应的属性。</li>
-<li>使用关联数组语法<code>对象名[&quot;属性名&quot;] = 值</code>这种形式，为对象添加对应的属性</li>
-</ul>
+<li>使用关联数组语法<code>对象名[&quot;属性名&quot;] = 值</code>这种形式，为对象添加对应的属性<a id="more"></a>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//o是一个没有任何自定义属性的对象</span></div><div class="line"><span class="keyword">var</span> o = &#123;&#125;;</div><div class="line"></div><div class="line"><span class="comment">//现在想让他拥有name age gender等属性</span></div><div class="line"><span class="comment">//直接使用 对象名.属性名 = 值</span></div><div class="line">o.name = <span class="string">"张三"</span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//使用 对象名["属性名"] = 值</span></div><div class="line">o[<span class="string">"age"</span>] = <span class="number">18</span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//可以通过打印查看效果</span></div><div class="line"><span class="built_in">console</span>.log(o.name);</div><div class="line"><span class="built_in">console</span>.log(o.age);</div></pre></td></tr></table></figure>
+</li>
+</ul>
 <p><strong><em>注意：</em></strong></p>
 <p>当要动态的为一个对象添加属性的时候，必须使用关联数组的方式。</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//接收到了用户的输入</span></div><div class="line"><span class="keyword">var</span> str = prompt(<span class="string">"请输入属性名"</span>);</div><div class="line"></div><div class="line">o = &#123;&#125;;</div><div class="line"><span class="comment">//o.str = "这是一个新属性"; //这么写是不对的，会给对象新增一个str属性</span></div><div class="line"><span class="comment">//正确的写法如下</span></div><div class="line">o[str]=<span class="string">"这是一个新属性"</span>;</div></pre></td></tr></table></figure>
@@ -295,6 +296,26 @@
 </aside>
 
 
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="对象的动态特性" data-title="对象的动态特性" data-url="http://yoursite.com/2017/05/12/对象的动态特性/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ture"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
   
   

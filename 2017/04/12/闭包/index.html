@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="A fish in the sea">
 <meta property="og:description" content="闭包的概念闭包从字面意思理解就是闭合, 包起来. 简单的来说闭包就是,一个具有封闭的对外不公开的, 包裹结构, 或空间. 在JavaScript中函数可以构成闭包. 一般函数是一个代码结构的封闭结构, 即包裹的特性, 同时根据作用域规则, 只允许函数访问外部的数据, 外部无法访问函数内部的数据, 即封闭的对外不公开的特性. 因此说函数可以构成闭包. 那闭包要解决什么问题呢？ 因为闭包内的数据不允许">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-13T12:43:45.845Z">
+<meta property="og:updated_time" content="2017-10-25T06:26:55.639Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="闭包">
 <meta name="twitter:description" content="闭包的概念闭包从字面意思理解就是闭合, 包起来. 简单的来说闭包就是,一个具有封闭的对外不公开的, 包裹结构, 或空间. 在JavaScript中函数可以构成闭包. 一般函数是一个代码结构的封闭结构, 即包裹的特性, 同时根据作用域规则, 只允许函数访问外部的数据, 外部无法访问函数内部的数据, 即封闭的对外不公开的特性. 因此说函数可以构成闭包. 那闭包要解决什么问题呢？ 因为闭包内的数据不允许">
@@ -179,7 +179,7 @@
 <li>因为闭包内的数据不允许外界访问</li>
 <li>要解决的问题就是间接访问该数据</li>
 </ol>
-<p><strong>函数就可以构成闭包, 要解决的问题就是访问到函数内部的数据</strong></p>
+<p><strong>函数就可以构成闭包, 要解决的问题就是访问到函数内部的数据</strong><br><a id="more"></a></p>
 <p>我们观察下面的函数<code>foo</code>，在<code>foo</code>内部有一个变量<code>num</code>，能否在函数外部访问到这个变量<code>num</code>呢？</p>
 <figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> num = <span class="number">123</span>;</div><div class="line">    <span class="keyword">return</span> num;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> res = foo();</div><div class="line"><span class="built_in">console</span>.log( res ); <span class="comment">// =&gt; 123</span></div></pre></td></tr></table></figure>
 <p>分析：</p>
@@ -319,6 +319,26 @@
 </aside>
 
 
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="闭包" data-title="闭包" data-url="http://yoursite.com/2017/04/12/闭包/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ture"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
   
   

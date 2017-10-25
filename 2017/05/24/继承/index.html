@@ -8,17 +8,17 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>聊聊&#39;继承&#39;这一回事 | A fish in the sea</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#聊聊’继承’这一回事 继承作为面向对象的三大特性之一,它的重要性不言而论,但在深入了解’继承’之前,我们必须先搞清楚一下两个问题:1.什么是继承? 2.继承的目的是? ######现在让我们来解开’继承’这一神秘的面纱吧 ###什么是继承?        继承就是一种对原始类型（父类）进行细化、扩展的一个过程 ###继承的目的?        让子类拥有父类的所有属性和方法，避免重复劳动 继承的">
+  <meta name="description" content="#聊聊’继承’这一回事 继承作为面向对象的三大特性之一,它的重要性不言而论,但在深入了解’继承’之前,我们必须先搞清楚一下两个问题:1.什么是继承? 2.继承的目的是? ######现在让我们来解开’继承’这一神秘的面纱吧 ###什么是继承?        继承就是一种对原始类型（父类）进行细化、扩展的一个过程 ###继承的目的?        让子类拥有父类的所有属性和方法，避免重复劳动">
 <meta property="og:type" content="article">
 <meta property="og:title" content="聊聊&#39;继承&#39;这一回事">
 <meta property="og:url" content="http://yoursite.com/2017/05/24/继承/index.html">
 <meta property="og:site_name" content="A fish in the sea">
-<meta property="og:description" content="#聊聊’继承’这一回事 继承作为面向对象的三大特性之一,它的重要性不言而论,但在深入了解’继承’之前,我们必须先搞清楚一下两个问题:1.什么是继承? 2.继承的目的是? ######现在让我们来解开’继承’这一神秘的面纱吧 ###什么是继承?        继承就是一种对原始类型（父类）进行细化、扩展的一个过程 ###继承的目的?        让子类拥有父类的所有属性和方法，避免重复劳动 继承的">
+<meta property="og:description" content="#聊聊’继承’这一回事 继承作为面向对象的三大特性之一,它的重要性不言而论,但在深入了解’继承’之前,我们必须先搞清楚一下两个问题:1.什么是继承? 2.继承的目的是? ######现在让我们来解开’继承’这一神秘的面纱吧 ###什么是继承?        继承就是一种对原始类型（父类）进行细化、扩展的一个过程 ###继承的目的?        让子类拥有父类的所有属性和方法，避免重复劳动">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-25T02:17:12.754Z">
+<meta property="og:updated_time" content="2017-10-25T06:28:05.086Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="聊聊&#39;继承&#39;这一回事">
-<meta name="twitter:description" content="#聊聊’继承’这一回事 继承作为面向对象的三大特性之一,它的重要性不言而论,但在深入了解’继承’之前,我们必须先搞清楚一下两个问题:1.什么是继承? 2.继承的目的是? ######现在让我们来解开’继承’这一神秘的面纱吧 ###什么是继承?        继承就是一种对原始类型（父类）进行细化、扩展的一个过程 ###继承的目的?        让子类拥有父类的所有属性和方法，避免重复劳动 继承的">
+<meta name="twitter:description" content="#聊聊’继承’这一回事 继承作为面向对象的三大特性之一,它的重要性不言而论,但在深入了解’继承’之前,我们必须先搞清楚一下两个问题:1.什么是继承? 2.继承的目的是? ######现在让我们来解开’继承’这一神秘的面纱吧 ###什么是继承?        继承就是一种对原始类型（父类）进行细化、扩展的一个过程 ###继承的目的?        让子类拥有父类的所有属性和方法，避免重复劳动">
   
     <link rel="alternative" href="/atom.xml" title="A fish in the sea" type="application/atom+xml">
   
@@ -177,8 +177,7 @@
 2.继承的目的是?
 </code></pre><p>######现在让我们来解开’继承’这一神秘的面纱吧</p>
 <p>###什么是继承?<br>        继承就是一种对原始类型（父类）进行细化、扩展的一个过程</p>
-<p>###继承的目的?<br>        让子类拥有父类的所有属性和方法，避免重复劳动</p>
-<p>继承的核心在于让子类拥有父类的一切特征。那么在父类之后定义子类，分别具备父类的原生和原型部分的所有特征。这种我们称为<strong>‘对象伪造’</strong><br>这种方式虽然搞定了子类的特性问题，但是并不被JavaScript引擎推崇.</p>
+<p>###继承的目的?<br>        让子类拥有父类的所有属性和方法，避免重复劳动<br><a id="more"></a><br>继承的核心在于让子类拥有父类的一切特征。那么在父类之后定义子类，分别具备父类的原生和原型部分的所有特征。这种我们称为<strong>‘对象伪造’</strong><br>这种方式虽然搞定了子类的特性问题，但是并不被JavaScript引擎推崇.</p>
 <p>######实现步骤：<br>    1、找到（声明）父类<br>    2、创建子类，构造器中继承父类所有原生属性<br>    3、子类原型，拷贝父类原型<br>而Javascript的继承是基于原型链的继承。</p>
 <p>##JS实现继承三句：</p>
 <pre><code>1. 子类的原型等于父类原型创建出来的实例
@@ -336,6 +335,26 @@ eg:
 </aside>
 
 
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="继承" data-title="聊聊&#39;继承&#39;这一回事" data-url="http://yoursite.com/2017/05/24/继承/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ture"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
   
   

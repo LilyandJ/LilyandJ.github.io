@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="A fish in the sea">
 <meta property="og:description" content="#this关键字 全局this全局this一般指向全局对象，浏览器中的全局对象就是 window ##函数this    一般函数的this ，由window调用，this就指向window对象。    function show(){                console.log(this); //谁调用函数，函数中的this就指向谁            } window.show()">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-10-25T01:31:45.269Z">
+<meta property="og:updated_time" content="2017-10-25T06:26:33.489Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="this关键字的5种形式">
 <meta name="twitter:description" content="#this关键字 全局this全局this一般指向全局对象，浏览器中的全局对象就是 window ##函数this    一般函数的this ，由window调用，this就指向window对象。    function show(){                console.log(this); //谁调用函数，函数中的this就指向谁            } window.show()">
@@ -176,7 +176,8 @@
 <h2 id="全局this"><a href="#全局this" class="headerlink" title="全局this"></a>全局this</h2><pre><code>全局this一般指向全局对象，浏览器中的全局对象就是 window
 </code></pre><p>##函数this<br>    一般函数的this ，由window调用，this就指向window对象。<br>    function show(){<br>                console.log(this); //谁调用函数，函数中的this就指向谁<br>            }</p>
 <pre><code>window.show();
-</code></pre><p>##对象函数this<br>    this===对象本身 ，原则：谁调用我，this就指向谁<br>    var obj=new Object();<br>            obj.name=’张三疯’;<br>            obj.show=function(){<br>                console.log(this.name,this);<br>            }<br>            obj.show();//this代表obj对象本身</p>
+</code></pre><a id="more"></a>
+<p>##对象函数this<br>    this===对象本身 ，原则：谁调用我，this就指向谁<br>    var obj=new Object();<br>            obj.name=’张三疯’;<br>            obj.show=function(){<br>                console.log(this.name,this);<br>            }<br>            obj.show();//this代表obj对象本身</p>
 <p>##构造器上的this<br>    使用new关键字构造时，默认都指向当前新创建的对象。<br>    this===new关键词实例化出来的对象<br>    function Person(name,age){<br>                this.name=name;<br>                this.age=age;<br>                console.log(this); //代表的是对象本身<br>            }</p>
 <pre><code>var p1=new Person(&apos;李黑&apos;,18);
 var p2=new Person(&apos;李白&apos;,19);
@@ -289,6 +290,26 @@ var p2=new Person(&apos;李白&apos;,19);
 </aside>
 
 
+
+  
+  <div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="this关键字" data-title="this关键字的5种形式" data-url="http://yoursite.com/2017/05/19/this关键字/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ture"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
 
   
   

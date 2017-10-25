@@ -172,74 +172,10 @@
       
         <p>#面向对象的三大特性</p>
 <p>###所有面向对象的语言都具备三大特性。分别是：封装、继承和多态。<br>因为上一篇文章讲述了<strong>“继承”</strong>,所以这次主要说明的是封装和多态。</p>
-<p>##封装<br>    1)什么是封装<br>        a. 将不想公开的属性进行私有化，外面无法访问和读取<br>        b. 可以提供特权方法允许别人读或写相应的数据（setter、getter）<br>        c. 使用闭包将所有类的定义（构造函数、原型、静态方法）统筹起来，暴露类的名称延缓资源回收<br>    eg:<br>    //创建一个类<br>            function Person(name,age){<br>                this.name=name;<br>                //this.age=age;<br>                var age=age; //私有化了一个年龄属性<br>                this.show=function(){<br>                    console.log(this.name + ‘年龄：’+age+’岁’); //内部可以访问私有化的属性<br>                }<br>            }</p>
-<pre><code>        //根据类创建实例
-        var p1=new Person(&apos;张辽&apos;,19);
-        p1.show();
-        p1.name=&apos;小乔&apos;;
-        p1.show();
-
-        console.log(p1.age); //年龄已经私有化不允许直接访问
-2)闭包实现封装写法
-    (fucntion(){
-        function Person(name,age){
-            this.name=name;
-            var _age=age; //将变量设置成为局部变量，外界无法访问
-            this.getAge=function(){ //提供特权方法供外外界读取年龄
-                return _age;
-            }
-        }
-
-        Person.prototype.show=function(){}
-        Person.prototype.run=function(){}
-        Person.prototype={
-            show:function(){
-            },
-            run:function(){
-            }
-        };
-
-        //静态方法： 不依赖于对象调用，直接使用类名进行调用。如： Math.ceil() $.each()
-        Person.run=function(){}
-
-        //将类暴露到全局上
-        window.Person=Person;
-    })();
-</code></pre><p>##多态</p>
-<p>######JS的函数重载<br>这个是多态的基础，在之前的Javascript入门已经说过了，JS函数不支持多态，但是事实上JS函数是无态的，支持任意长度，类型的参数列表。如果同时定义了多个同名函数，则以最后一个函数为准。</p>
-<p>######多态基本概念<br>可以理解为多种状态，根据用户的参数个数、类型、不同的值等差异的特征体现出不同的功能(如:传不同的对象进入函数，体现出不一样的结果，就叫多态)</p>
-<p>eg:本人家里养了一只鸡，一只鸭。当主人向他们发出‘叫’的命令时。鸭子会嘎嘎的叫，而鸡会咯咯的叫。转化成代码形式如下</p>
-<pre><code>var makeSound = function(animal) {
-    if(animal instanceof Duck) {
-            console.log(&apos;嘎嘎嘎&apos;);
-    } else if (animal instanceof Chicken) {
-        console.log(&apos;咯咯咯&apos;);
-    }
-}
-var Duck = function(){}
-var Chiken = function() {};
-makeSound(new Chicken());
-makeSound(new Duck());
-
-
-多态的代码示例
-
-var makeSound = function(animal) {
-    animal.sound();
-}
-
-var Duck = function(){}
-Duck.prototype.sound = function() {
-    console.log(&apos;嘎嘎嘎&apos;)
-}
-var Chiken = function() {};
-Chiken.prototype.sound = function() {
-    console.log(&apos;咯咯咯&apos;)
-}
-
-makeSound(new Chicken());
-makeSound(new Duck());
-</code></pre>
+<p>##封装<br>    1)什么是封装<br>        a. 将不想公开的属性进行私有化，外面无法访问和读取<br>        b. 可以提供特权方法允许别人读或写相应的数据（setter、getter）<br>        c. 使用闭包将所有类的定义（构造函数、原型、静态方法）统筹起来，暴露类的名称延缓资源回收<br>
+        
+          <a class="article-more-a" href="/2017/05/27/面向对象的三大特性/#more">more >></a>
+        
       
 
       
@@ -306,59 +242,10 @@ makeSound(new Duck());
 2.继承的目的是?
 </code></pre><p>######现在让我们来解开’继承’这一神秘的面纱吧</p>
 <p>###什么是继承?<br>        继承就是一种对原始类型（父类）进行细化、扩展的一个过程</p>
-<p>###继承的目的?<br>        让子类拥有父类的所有属性和方法，避免重复劳动</p>
-<p>继承的核心在于让子类拥有父类的一切特征。那么在父类之后定义子类，分别具备父类的原生和原型部分的所有特征。这种我们称为<strong>‘对象伪造’</strong><br>这种方式虽然搞定了子类的特性问题，但是并不被JavaScript引擎推崇.</p>
-<p>######实现步骤：<br>    1、找到（声明）父类<br>    2、创建子类，构造器中继承父类所有原生属性<br>    3、子类原型，拷贝父类原型<br>而Javascript的继承是基于原型链的继承。</p>
-<p>##JS实现继承三句：</p>
-<pre><code>1. 子类的原型等于父类原型创建出来的实例
-Student.prototype=Object.create(Person.prototype);
-
-2. 让子类拥有父类的所有属性，子类的构造函数调用父类的构造函数
-    Person.apply(this,arguments);
-
-3. 找回被替换掉的构造函数
-     Student.prototype.contructor=Student;
-eg:
-//定义父类
-    function Person(name,age){
-        this.name=name;
-        this.age=age;
-    }
-    Person.prototype.run=function(){
-        console.log(this.name + &apos;跑步速度每小时80公里&apos;);
-    }
-
-    //定义子类
-    function Student(name,age,sno){
-        this.sno=sno;
-        //this === 实例出来的对象
-        Person.apply(this,arguments);
-        //使用arguments实现传参时，必须将子类独有的参数放在后面
-    }
-
-
-    //真正的继承：子类原型是父类原型的实例
-    Student.prototype=Object.create(Person.prototype);
-
-    //找回被替换掉的构造函数
-    Student.prototype.contructor=Student;
-
-    //先继承再扩展
-    Student.prototype.study=function(){
-        console.log(this.name+&apos;正在学习，准备考个清华大学&apos;);
-    }
-
-    //实例化对象
-    var s1=new Student(&apos;小明&apos;,11,&apos;001&apos;);
-    s1.study();
-    s1.run();
-
-    console.log(s1 instanceof Student);
-    console.log(s1 instanceof Person);
-
-    console.log(s1);
-</code></pre><p>希望以上内容对你能有所帮助,谢谢.</p>
-
+<p>###继承的目的?<br>        让子类拥有父类的所有属性和方法，避免重复劳动<br>
+        
+          <a class="article-more-a" href="/2017/05/24/继承/#more">more >></a>
+        
       
 
       
@@ -424,13 +311,10 @@ eg:
 <h2 id="全局this"><a href="#全局this" class="headerlink" title="全局this"></a>全局this</h2><pre><code>全局this一般指向全局对象，浏览器中的全局对象就是 window
 </code></pre><p>##函数this<br>    一般函数的this ，由window调用，this就指向window对象。<br>    function show(){<br>                console.log(this); //谁调用函数，函数中的this就指向谁<br>            }</p>
 <pre><code>window.show();
-</code></pre><p>##对象函数this<br>    this===对象本身 ，原则：谁调用我，this就指向谁<br>    var obj=new Object();<br>            obj.name=’张三疯’;<br>            obj.show=function(){<br>                console.log(this.name,this);<br>            }<br>            obj.show();//this代表obj对象本身</p>
-<p>##构造器上的this<br>    使用new关键字构造时，默认都指向当前新创建的对象。<br>    this===new关键词实例化出来的对象<br>    function Person(name,age){<br>                this.name=name;<br>                this.age=age;<br>                console.log(this); //代表的是对象本身<br>            }</p>
-<pre><code>var p1=new Person(&apos;李黑&apos;,18);
-var p2=new Person(&apos;李白&apos;,19);
-</code></pre><p>##借来的this<br>    所有的函数 Function都拥有以下几个默认方法(call,apply,bind共同的作用是：改变函数内this的指向)，将函数放在另外一个对象的上下文环境中去执行。<br>        理解：函数可以交给另外一个对象去调用<br>                  函数.call(对象,参数1,参数2,参数n);<br>                  函数.apply(对象,[参数1,参数2,参数n]); //【常用】可以使用arguments<br>            .call方法写参数时直接并列在后面，.apply的参数是以数组形式传递</p>
-<pre><code>回调函数.bind(对象,参数1,参数2,参数n); //被动的改变回调函数的this指向
 </code></pre>
+        
+          <a class="article-more-a" href="/2017/05/19/this关键字/#more">more >></a>
+        
       
 
       
@@ -502,41 +386,10 @@ var p2=new Person(&apos;李白&apos;,19);
         top:50%;
         margin-top: -盒子高度的一半;
     }
-</code></pre><p>###第二种方法position+margin的第二种方式</p>
-<pre><code>#box{
-
-       position: fixed;(也可以是absolute)
-       top:0;
-       left: 0;
-       right: 0;
-       bottom:0;
-       margin: auto;
-   }
-</code></pre><p>###第三种方法需要借助伪元素来撑开高度</p>
-<pre><code>html,body{
-       height:100%;
-   }
-   body{
-       text-align: center;
-   }
-   body::before{
-       /* 必备属性 */
-       content : &apos;&apos;;
-       display: inline-block;
-       height:100%;
-       vertical-align: middle;
-   }
-   #box{
-       vertical-align: middle;
-       display: inline-block;
-   }
-</code></pre><p>###第四种方法伸缩盒子布局<br>     html,body{<br>            height: 100%;<br>        }<br>        body{<br>            /<em> 开启伸缩盒子 </em>/<br>            display: flex;</p>
-<pre><code>    /* (主轴)水平方向对齐 */
-    justify-content: center;
-    /* （侧轴）垂直方向对齐 */
-    align-items: center;
-}
 </code></pre>
+        
+          <a class="article-more-a" href="/2017/05/17/让盒子居中的四种方法/#more">more >></a>
+        
       
 
       
@@ -602,19 +455,10 @@ var p2=new Person(&apos;李白&apos;,19);
 <p>当一个对象需要某个属性的时候，可以用两种方式为其添加属性</p>
 <ul>
 <li>直接使用<code>对象名.属性名 = 值</code>这种形式，为对象添加对应的属性。</li>
-<li>使用关联数组语法<code>对象名[&quot;属性名&quot;] = 值</code>这种形式，为对象添加对应的属性</li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//o是一个没有任何自定义属性的对象</span></div><div class="line"><span class="keyword">var</span> o = &#123;&#125;;</div><div class="line"></div><div class="line"><span class="comment">//现在想让他拥有name age gender等属性</span></div><div class="line"><span class="comment">//直接使用 对象名.属性名 = 值</span></div><div class="line">o.name = <span class="string">"张三"</span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//使用 对象名["属性名"] = 值</span></div><div class="line">o[<span class="string">"age"</span>] = <span class="number">18</span>;</div><div class="line"></div><div class="line"></div><div class="line"></div><div class="line"><span class="comment">//可以通过打印查看效果</span></div><div class="line"><span class="built_in">console</span>.log(o.name);</div><div class="line"><span class="built_in">console</span>.log(o.age);</div></pre></td></tr></table></figure>
-<p><strong><em>注意：</em></strong></p>
-<p>当要动态的为一个对象添加属性的时候，必须使用关联数组的方式。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="comment">//接收到了用户的输入</span></div><div class="line"><span class="keyword">var</span> str = prompt(<span class="string">"请输入属性名"</span>);</div><div class="line"></div><div class="line">o = &#123;&#125;;</div><div class="line"><span class="comment">//o.str = "这是一个新属性"; //这么写是不对的，会给对象新增一个str属性</span></div><div class="line"><span class="comment">//正确的写法如下</span></div><div class="line">o[str]=<span class="string">"这是一个新属性"</span>;</div></pre></td></tr></table></figure>
-<p>##2、对象属性的访问形式</p>
-<ul>
-<li>点语法：<code>对象名.属性名</code></li>
-<li>关联数组：<code>对象名[属性名]</code></li>
-</ul>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> o = &#123;</div><div class="line">    name:<span class="string">"张三"</span>,</div><div class="line">    sayHello:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</div><div class="line">        <span class="built_in">console</span>.log(<span class="string">"你好，我叫"</span>+ <span class="keyword">this</span>.name);</div><div class="line">    &#125;</div><div class="line">&#125;;</div><div class="line"></div><div class="line"><span class="comment">//点语法</span></div><div class="line"><span class="built_in">console</span>.log(o.name);</div><div class="line"></div><div class="line"><span class="comment">//关联数组语法</span></div><div class="line"><span class="built_in">console</span>.log(o[<span class="string">"name"</span>]);</div><div class="line"></div><div class="line"><span class="comment">//这两种用法同样适用于方法</span></div><div class="line">o.sayHello();</div><div class="line">o[<span class="string">"sayHello"</span>]();</div><div class="line"></div><div class="line"><span class="comment">//可以对这个对象的属性进行遍历，如果是值就打印，如果是方法就调用</span></div><div class="line"><span class="keyword">for</span>(<span class="keyword">var</span> k <span class="keyword">in</span> o)&#123;</div><div class="line">    <span class="keyword">if</span> ( <span class="keyword">typeof</span> o[ k ] == <span class="string">'function'</span> ) &#123;</div><div class="line">        o[ k ]();</div><div class="line">    &#125; <span class="keyword">else</span> &#123;</div><div class="line">        <span class="built_in">console</span>.log( <span class="string">'log: '</span> + o[ k ] );</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-
+<li>使用关联数组语法<code>对象名[&quot;属性名&quot;] = 值</code>这种形式，为对象添加对应的属性
+        
+          <a class="article-more-a" href="/2017/05/12/对象的动态特性/#more">more >></a>
+        
       
 
       
@@ -683,40 +527,10 @@ var p2=new Person(&apos;李白&apos;,19);
 <li>因为闭包内的数据不允许外界访问</li>
 <li>要解决的问题就是间接访问该数据</li>
 </ol>
-<p><strong>函数就可以构成闭包, 要解决的问题就是访问到函数内部的数据</strong></p>
-<p>我们观察下面的函数<code>foo</code>，在<code>foo</code>内部有一个变量<code>num</code>，能否在函数外部访问到这个变量<code>num</code>呢？</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> num = <span class="number">123</span>;</div><div class="line">    <span class="keyword">return</span> num;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">var</span> res = foo();</div><div class="line"><span class="built_in">console</span>.log( res ); <span class="comment">// =&gt; 123</span></div></pre></td></tr></table></figure>
-<p>分析：</p>
-<p>在上面的代码中，确实可以访问到<code>num</code>这个函数内部的变量。但是能不能多次访问呢？</p>
-<p>不能，因为每次访问都得重新调用一次<code>foo</code>函数，每次调用都会重新创建一个<code>num = 123</code>，然后返回。</p>
-<h4 id="解决思路"><a href="#解决思路" class="headerlink" title="解决思路"></a>解决思路</h4><p>函数内的数据不能直接在函数外被访问，是因为作用域的关系，上级作用域不能直接访问下级作用域中的数据。</p>
-<p>但是如果反过来，下级作用域可以直接访问上级作用域中的数据。那么如果在函数<code>foo</code>内定义一个函数，那么在这个内部函数中是可以直接访问<code>foo</code>中的<code>num</code>的。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> num = <span class="built_in">Math</span>.random();    </div><div class="line">    <span class="function"><span class="keyword">function</span> <span class="title">func</span>(<span class="params"></span>) </span>&#123;</div><div class="line">        <span class="keyword">return</span> num;    </div><div class="line">    &#125;</div><div class="line">    <span class="keyword">return</span> func;</div><div class="line">&#125;</div><div class="line"></div><div class="line"></div><div class="line"><span class="keyword">var</span> f = foo();</div><div class="line"><span class="comment">// f可以直接访问num，而且多次访问，访问的也是同一个，并不会返回新的num</span></div><div class="line"><span class="keyword">var</span> res1 = f();</div><div class="line"><span class="keyword">var</span> res2 = f();</div></pre></td></tr></table></figure>
-<h3 id="如何获得超过一个数据"><a href="#如何获得超过一个数据" class="headerlink" title="如何获得超过一个数据"></a>如何获得超过一个数据</h3><p>函数的返回值只能有一个，那按照上面的方法，我们只能对函数内部的一个数据进行操作。怎么操作函数内的多个数据呢？</p>
-<p>可以使用对象，代码如下：<br><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span> (<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> num1 = <span class="built_in">Math</span>.random();</div><div class="line">    <span class="keyword">var</span> num2 = <span class="built_in">Math</span>.random();</div><div class="line">    <span class="comment">//可以将多个函数包含在一个对象内进行返回，这样就能在函数外部操作当前函数内的多个变量</span></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        num1: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> num1;</div><div class="line">        &#125;,</div><div class="line">        num2: <span class="function"><span class="keyword">function</span> (<span class="params"></span>) </span>&#123;</div><div class="line">            <span class="keyword">return</span> num2;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure></p>
-<h3 id="如何完成读取一个数据和修改这个数据"><a href="#如何完成读取一个数据和修改这个数据" class="headerlink" title="如何完成读取一个数据和修改这个数据"></a>如何完成读取一个数据和修改这个数据</h3><p>前面讲的都是如何去获取函数内部的数据，接下来我们考虑如何修改函数内部的数据。</p>
-<p>同样，也是使用内部的函数进行操作。</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    <span class="keyword">var</span> num = <span class="built_in">Math</span>.random();</div><div class="line">    <span class="comment">//分别定义get和set函数，使用对象进行返回</span></div><div class="line">    <span class="keyword">return</span> &#123;</div><div class="line">        <span class="comment">//get_num负责获取数据</span></div><div class="line">        get_num: <span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;    </div><div class="line">            <span class="keyword">return</span> num;</div><div class="line">        &#125;,</div><div class="line">        <span class="comment">//set_num负责设置数据</span></div><div class="line">        set_num: <span class="function"><span class="keyword">function</span>(<span class="params">value</span>) </span>&#123;</div><div class="line">            num = value;</div><div class="line">        &#125;</div><div class="line">    &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h3 id="闭包的基本结构"><a href="#闭包的基本结构" class="headerlink" title="闭包的基本结构"></a>闭包的基本结构</h3><p><strong>一般闭包要解决的的问题就是要想办法间接的获得函数内数据的使用权. 那么我们的可以总结出一个基本的使用模型.</strong></p>
-<ol>
-<li>写一个函数, 函数内定义一个新函数, 返回新函数, 用新函数获得函数内的数据</li>
-<li>写一个函数, 函数内定义一个对象, 对象中绑定多个函数( 方法 ), 返回对象, 利用对象的方法访问函数内的数据</li>
-</ol>
-<p>##总结: 闭包<br>    1) 什么是闭包？<br>        闭包就是一种作用域的体现，体现外部可以访问内部的数据!</p>
-<pre><code>2) 闭包的特征
-    a. 函数内嵌套函数
-    b. 正常情况下，函数内可以访问函数外的数据，但是函数外不能访问函数内的数据
-    c. 通过特殊的语法结构，可以让函数外的语句访问函数内的数据（闭包典型体现）
-    d. 将内部函数暴露到全局上，延缓资源回收
-
-3) 典型写法
-    (function(){
-        var i=1;
-        window.count=function(){
-            console.log(i++);
-        }
-    })();
-</code></pre>
+<p><strong>函数就可以构成闭包, 要解决的问题就是访问到函数内部的数据</strong><br>
+        
+          <a class="article-more-a" href="/2017/04/12/闭包/#more">more >></a>
+        
       
 
       
@@ -787,126 +601,10 @@ var p2=new Person(&apos;李白&apos;,19);
 </ol>
 <p>就递归而言最重要的就是跳出结构，因为跳出了才可以有结果.</p>
 <h3 id="化归思想"><a href="#化归思想" class="headerlink" title="化归思想"></a>化归思想</h3><p><strong>化归思想：</strong>将一个问题由难化易，由繁化简，由复杂化简单的过程称为化归，它是转化和归结的简称。</p>
-<p>递归思想就是将一个问题转换为一个已解决的问题来实现</p>
-<p>假如有一个函数<code>f</code>, 如果它是递归函数的话, 那么也就是说函数体内的问题还是转换为 <code>f</code>的形式.</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">f</span>(<span class="params"></span>) </span>&#123;</div><div class="line">    ... f( ... ) ...</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="例子"><a href="#例子" class="headerlink" title="例子:"></a>例子:</h4><blockquote>
-<p>1, 2, 3, 4, 5, …, 100 求和</p>
-</blockquote>
-<ol>
-<li><p>首先假定递归函数已经写好, 假设是<code>foo</code>. 即<code>foo(100)</code>就是求<code>1</code>到<code>100</code>的和</p>
-</li>
-<li><p>寻找递推关系. 就是<code>n</code>与<code>n-1</code>, 或<code>n-2</code>之间的关系:<code>foo( n ) == n + foo( n - 1 )</code></p>
-</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">var</span> res = foo(<span class="number">100</span>);</div><div class="line"><span class="keyword">var</span> res = foo(<span class="number">99</span>) + <span class="number">100</span>;</div></pre></td></tr></table></figure>
-<p><strong>将递推结构转换为递归体</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params">n</span>)</span>&#123;</div><div class="line">    <span class="keyword">return</span> n + foo( n - <span class="number">1</span> );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<p>上面就是利用了化归思想：</p>
-<ul>
-<li><p>将 求 100 转换为 求 99</p>
-</li>
-<li><p>将 求 99 转换为 求 98</p>
-</li>
-<li><p>…</p>
-</li>
-<li><p>将求 2 转换为 求 1</p>
-</li>
-<li><p>求 1 结果就是 1</p>
-</li>
-<li><p>即: foo( 1 ) 是 1</p>
-</li>
-</ul>
-<p><strong>将临界条件加到递归体中(求1的结果为1)</strong></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">foo</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( n == <span class="number">1</span> ) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> n + foo( n - <span class="number">1</span> );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="练习"><a href="#练习" class="headerlink" title="练习:"></a>练习:</h4><blockquote>
-<p>求 1, 3, 5, 7, 9, … 第<code>n</code>项的结果与前<code>n</code>项和. 序号从<code>0</code>开始</p>
-</blockquote>
-<h5 id="先看求第n项"><a href="#先看求第n项" class="headerlink" title="先看求第n项"></a>先看求第<code>n</code>项</h5><ol>
-<li><p>首先假定递归函数已经写好, 假设是<code>fn</code>. 那么第<code>n</code>项就是<code>fn(n)</code></p>
-</li>
-<li><p>找递推关系:<code>fn(n) == f(n-1) + 2</code></p>
-</li>
-<li><p>递归体</p>
-</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">n</span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> fn(n<span class="number">-1</span>) + <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li><p>找临界条件</p>
-<ul>
-<li><p>求 n -&gt; n-1</p>
-</li>
-<li><p>求 n-1 -&gt; n-2</p>
-</li>
-<li><p>…</p>
-</li>
-<li><p>求 1 -&gt; 0</p>
-</li>
-<li><p>求 第 0 项, 就是 1</p>
-</li>
-</ul>
-</li>
-<li><p>加入临界条件</p>
-</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( n == <span class="number">0</span> ) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> fn( n<span class="number">-1</span> ) + <span class="number">2</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h5 id="再看求前n项和"><a href="#再看求前n项和" class="headerlink" title="再看求前n项和"></a>再看求前<code>n</code>项和</h5><ol>
-<li><p>假设已完成, sum( n ) 就是前 n 项和</p>
-</li>
-<li><p>找递推关系: 前 n 项和 等于 第 n 项 + 前 n-1 项的和</p>
-</li>
-<li><p>递归体</p>
-</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">return</span> fn( n ) + sum( n - <span class="number">1</span> );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<ol>
-<li><p>找临界条件</p>
-<ul>
-<li><code>n == 1</code>结果为 1</li>
-</ul>
-</li>
-<li><p>加入临界条件</p>
-</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> (n == <span class="number">0</span>) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> fn(n) + sum(n - <span class="number">1</span>);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="练习-1"><a href="#练习-1" class="headerlink" title="练习"></a>练习</h4><blockquote>
-<p>现有数列: 1, 1, 2, 4, 7, 11, 16, … 求 第 n 项, 求前 n 项和.</p>
-</blockquote>
-<h5 id="求第n项"><a href="#求第n项" class="headerlink" title="求第n项"></a>求第<code>n</code>项</h5><ol>
-<li><p>假设已经得到结果 fn, fn( 10 ) 就是第 10 项</p>
-</li>
-<li><p>找递推关系</p>
-<ul>
-<li><p>0, 1 =&gt; fn( 0 ) + 0 = fn( 1 )</p>
-</li>
-<li><p>1, 2 =&gt; fn( 1 ) + 1 = fn( 2 )</p>
-</li>
-<li><p>2, 3 =&gt; fn( 2 ) + 2 = fn( 3 )</p>
-</li>
-<li><p>…</p>
-</li>
-<li><p>n-1, n =&gt; fn( n-1 ) + n - 1 = fn( n )</p>
-</li>
-</ul>
-</li>
-<li><p>递归体也就清楚了</p>
-</li>
-<li><p>临界条件是 n == 0 =&gt; 1</p>
-</li>
-</ol>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( n == <span class="number">0</span> ) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> fn( n<span class="number">-1</span> ) + n - <span class="number">1</span>;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h5 id="前n项和"><a href="#前n项和" class="headerlink" title="前n项和"></a>前<code>n</code>项和</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">sum</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( n == <span class="number">0</span> ) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> sum( n - <span class="number">1</span> ) + fn( n );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="练习-2"><a href="#练习-2" class="headerlink" title="练习"></a>练习</h4><blockquote>
-<p>Fibonacci 数列: 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, … 求其第 n 项.</p>
-</blockquote>
-<p>递推关系:<code>fn(n) == fn(n-1) + fn(n - 2)</code></p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">function</span> <span class="title">fib</span>(<span class="params"> n </span>) </span>&#123;</div><div class="line">    <span class="keyword">if</span> ( n == <span class="number">0</span> || n == <span class="number">1</span> ) <span class="keyword">return</span> <span class="number">1</span>;</div><div class="line">    <span class="keyword">return</span> fib( n - <span class="number">1</span> ) + fib( n - <span class="number">2</span> );</div><div class="line">&#125;</div></pre></td></tr></table></figure>
-<h4 id="练习-3"><a href="#练习-3" class="headerlink" title="练习"></a>练习</h4><blockquote>
-<p>阶乘：一个数字的阶乘表示的是从 1 开始 累乘到这个数字. 例如 3! 表示 1 <em> 2 </em> 3. 5! 就是 1 <em> 2 </em> 3 <em> 4 </em> 5. 规定 0 没有阶乘, 阶乘从1开始。</p>
-</blockquote>
-<p>求n的阶乘</p>
-<p>function foo ( n ) {<br>    if ( n == 1 ) return 1;<br>    return foo( n - 1 ) * n;<br>}</p>
-
+<p>递归思想就是将一个问题转换为一个已解决的问题来实现<br>
+        
+          <a class="article-more-a" href="/2017/04/01/递归/#more">more >></a>
+        
       
 
       
