@@ -6,15 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>Archives | A fish in the sea</title>
+  <title>Webpack模块化打包工具的使用 | A fish in the sea</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta property="og:type" content="website">
-<meta property="og:title" content="A fish in the sea">
-<meta property="og:url" content="http://yoursite.com/archives/page/2/index.html">
+  <meta name="description" content="#####回顾模块化模块化是一种将系统分离成独立功能部分的方法，可将系统分割成独立的功能部分，严格定义模块接口（功能）、模块间具有透明性。 #####模块化是实现方式1)CommonJS 服务器端的 Node.js 遵循 CommonJS规范，该规范的核心思想是允许模块通过 require 方法来“同步”加载所要依赖的其他模块，然后通过 exports 或 module.exports 来导出需要">
+<meta name="keywords" content="工具">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Webpack模块化打包工具的使用">
+<meta property="og:url" content="http://yoursite.com/2017/06/01/webpack的使用方法/index.html">
 <meta property="og:site_name" content="A fish in the sea">
+<meta property="og:description" content="#####回顾模块化模块化是一种将系统分离成独立功能部分的方法，可将系统分割成独立的功能部分，严格定义模块接口（功能）、模块间具有透明性。 #####模块化是实现方式1)CommonJS 服务器端的 Node.js 遵循 CommonJS规范，该规范的核心思想是允许模块通过 require 方法来“同步”加载所要依赖的其他模块，然后通过 exports 或 module.exports 来导出需要">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2017-11-15T23:26:28.091Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="A fish in the sea">
+<meta name="twitter:title" content="Webpack模块化打包工具的使用">
+<meta name="twitter:description" content="#####回顾模块化模块化是一种将系统分离成独立功能部分的方法，可将系统分割成独立的功能部分，严格定义模块接口（功能）、模块间具有透明性。 #####模块化是实现方式1)CommonJS 服务器端的 Node.js 遵循 CommonJS规范，该规范的核心思想是允许模块通过 require 方法来“同步”加载所要依赖的其他模块，然后通过 exports 或 module.exports 来导出需要">
   
     <link rel="alternative" href="/atom.xml" title="A fish in the sea" type="application/atom+xml">
   
@@ -148,139 +153,289 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            
-  
-  
+            <article id="post-webpack的使用方法" class="article article-type-post " itemscope itemprop="blogPost">
+  <div class="article-inner">
     
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      Webpack模块化打包工具的使用
+    </h1>
+  
+
+        
+        <a href="/2017/06/01/webpack的使用方法/" class="archive-article-date">
+  	<time datetime="2017-05-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-06-01</time>
+</a>
+        
+      </header>
     
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>#####回顾模块化<br>模块化是一种将系统分离成独立功能部分的方法，可将系统分割成独立的功能部分，严格定义模块接口（功能）、模块间具有透明性。</p>
+<p>#####模块化是实现方式<br>1)<strong>CommonJS</strong></p>
+<p>服务器端的 Node.js 遵循 CommonJS规范，该规范的核心思想是允许模块通过 require 方法来“同步”加载所要依赖的其他模块，然后通过 exports 或 module.exports 来导出需要暴露的接口(功能)。</p>
+<p>2)<strong>AMD</strong></p>
+<p>define(id?, dependencies?, factory)，它要在声明模块的时候指定所有的依赖 dependencies，并且还要当做形参传到 factory 中，对于依赖的模块提前执行，依赖前置。</p>
+<ul>
+<li><p>id?模块的名字 : 一般名字不需要写，名字默认为模块所在路径（script/a）。</p>
+</li>
+<li><p>dependencies?：模块依赖的其他模块([‘jquery’,’jquery.validate’])。</p>
+</li>
+<li><p>factory:创建模块的工厂function(jquery, validate)。</p>
+</li>
+</ul>
+<p>3)<strong>CMD</strong></p>
+<p>Common Module Definition （CMD）规范和 AMD 很相似，尽量保持简单，并与 CommonJS 和 Node.js 的 Modules 规范保持了很大的兼容性。</p>
+<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><p><strong>接下来进入主体</strong></p>
+<p>##Webpack :前端”模块化管理”和”打包工具”。</p>
+<ul>
+<li>1)<strong>全局安装webpack （安装webpack命令行工具）</strong></li>
+<li>2)<strong>本地安装（项目依赖),在你的项目文件下</strong></li>
+<li><p>3)<strong>命令行打包</strong></p>
+<pre><code>webpack a.js bundle.js
+a.js 主文件(入口文件，第一个被页面加载的文件）
+bundle.js 打包后的文件(文件内容包含a.js和a.js依赖的所有文件)
+</code></pre></li>
+</ul>
+<p>###webpack配置文件<br><strong>webpack提供了配置文件webpack.config.js，我们可以把webpack后面的参数放到配置文件中，之后直接使用webpack命令执行。</strong><br>具体配置步骤如下:</p>
+<ul>
+<li><p><strong>1.新建webpack.config.js(项目根目录创建webpack.config.js文件，拷贝以下模板)</strong></p>
+<pre><code>webpack.config.js
+
+var webpack = require(&apos;webpack&apos;);
+
+module.exports = {
+    //主文件
+    entry:&quot;./scripts/a&quot;,
+
+    //配置输出
+    output:{
+        //输出的路径
+        path:&quot;static/&quot;,
+        //输出的文件名
+        filename:&quot;bundle.js&quot;,
+        //浏览器引用时的输出文件的公共URL地址
+        publicPath:&quot;/static/&quot;
+    }
+}
+</code></pre></li>
+<li><p><strong>2.执行webpack命令</strong></p>
+</li>
+</ul>
+<hr>
+<p>#####webpack原生仅支持JavaScript模块加载（require(‘/xxx.js’)），如果需要提供其他的模块加载器，那么我们就必须进行安装。<br>如果直接通过require去加载非js文件，那么会报错。</p>
+<pre><code>You may need an appropriate loader to handle this file type.（提示差加载器）
+
+
+Cannot resolve module &apos;style-loader&apos;（没有安装模块。指定加载器，没有安装）
+</code></pre><hr>
+<p>##loader模块加载器<br>这是他的官网加载器列表 <a href="http://webpack.github.io/docs/loader-conventions.html" title="webpack class" target="_blank" rel="external">点这</a>  和 <a href="http://webpack.github.io/" title="webpack" target="_blank" rel="external">官网</a></p>
+<p>#####下面是几个常用的模块加载器使用方法:</p>
+<ul>
+<li><p><strong>1)style模块加载器</strong></p>
+<pre><code>style-loader: style文件加载器
+npm install css-loader style-loader --save-dev来安装这些loader
+使用模块加载器，你还需要在webpack.config.js中进行配置
+</code></pre></li>
+</ul>
+<pre><code>    var webpack = require(&apos;webpack&apos;);
+    module.exports = {
+        //主文件
+        entry:&quot;./scripts/a&quot;,
+
+        //配置输出
+        output:{
+            //输出的路径
+            path:&quot;static/&quot;,
+            //输出的文件名
+            filename:&quot;bundle.js&quot;,
+            //浏览器引用时的输出文件的公共URL地址
+            publicPath:&quot;/static/&quot;,
+            pathinfo:true
+        },
+
+        //模块配置
+        module:{
+            //模块加载器
+            loaders:[
+                 //test   ： 使用该加载器文件名的匹配模式
+                 //loader ： 加载器，多个由!连接。  style和css ,css加载器是读取css内容，style把读取到的css内容通过&lt;style&gt;标签添加到页面中。
+                 {test: /\.css$/, loader: &apos;style-loader!css-loader&apos;}
+            ]
+        }
+    }
+最后还需要在主文件中引入css模块
+
+    require(&quot;../styles/a.css&quot;);
+</code></pre><ul>
+<li><p><strong>2) less模块加载器</strong></p>
+<p>  安装：npm install less-loader –save-dev<br>(你需要先确保你的项目中有安装了less)</p>
+<p>  <strong>//模块配置</strong></p>
+<pre><code>module:{
+    //模块加载器
+    loaders:[
+          .........
+     {test:/\.less$/, loader: &apos;style!css!less&apos;}
+    ]
+}
+</code></pre></li>
+</ul>
+<p>导入myless.less模块。</p>
+<pre><code>require(&quot;../styles/myless.less&quot;);
+</code></pre><ul>
+<li><strong>3)url资源加载器</strong></li>
+</ul>
+<p>url-loader对图片的加载器，将采用如果图片小可以采用base64（内嵌在js中）。</p>
+<p>安装:npm install file-loader –save-dev</p>
+<p>npm install url-loader –save-dev (要先有file-loader加载器)</p>
+<p><strong>//模块配置</strong></p>
+<pre><code> module:{
+      loaders:[
+          ........
+          {
+              test: /\.(jpg|png|gif)$/,
+              loader:&apos;url?name=[path]/[name].[ext]&amp;limit=8192&apos;
+          }
+      ]
+  }
+limit 8192 代表图片小于8K就采用base64内嵌在模块中。
+name 生成文件的路径。
+</code></pre><p>在html页面中</p>
+<pre><code>&lt;img src=&quot;&quot; alt=&quot;&quot; id=&quot;img1&quot;/&gt;
+</code></pre><p>在主文件下引入</p>
+<pre><code>//加载图片
+var img1=require(&apos;../images/1.jpg&apos;);
+document.querySelector(&apos;#img1&apos;).src=img1;
+</code></pre><p>注:webpack会将图片转换成一个相对应的base64码的地址</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
       
       
-      <section class="archives-wrap">
-        <div class="archive-year-wrap">
-          <a href="/archives/2017" class="archive-year">2017</a>
-        </div>
-        <div class="archives">
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/05/12/对象的动态特性/" class="archive-article-date">
-  	<time datetime="2017-05-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-05-12</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/05/12/对象的动态特性/">对象的动态特性</a>
-    </h1>
-  
-
-        <div class="article-info info-on-right">
-          
 	<div class="article-tag tagcloud">
 		<i class="icon-price-tags icon"></i>
 		<ul class="article-tag-list">
 			 
         		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">js</a>
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color3">工具</a>
         		</li>
       		
 		</ul>
 	</div>
 
-          
+      
 
+      
+
+      
+        
+<div class="share-btn share-icons tooltip-left">
+  <div class="tooltip tooltip-east">
+    <span class="tooltip-item">
+      <a href="javascript:;" class="share-sns share-outer">
+        <i class="icon icon-share"></i>
+      </a>
+    </span>
+    <span class="tooltip-content">
+      <div class="share-wrap">
+        <div class="share-icons">
+          <a class="weibo share-sns" href="javascript:;" data-type="weibo">
+            <i class="icon icon-weibo"></i>
+          </a>
+          <a class="weixin share-sns wxFab" href="javascript:;" data-type="weixin">
+            <i class="icon icon-weixin"></i>
+          </a>
+          <a class="qq share-sns" href="javascript:;" data-type="qq">
+            <i class="icon icon-qq"></i>
+          </a>
+          <a class="douban share-sns" href="javascript:;" data-type="douban">
+            <i class="icon icon-douban"></i>
+          </a>
+          <a class="qzone share-sns" href="javascript:;" data-type="qzone">
+            <i class="icon icon-qzone"></i>
+          </a>
+          <a class="facebook share-sns" href="javascript:;" data-type="facebook">
+            <i class="icon icon-facebook"></i>
+          </a>
+          <a class="twitter share-sns" href="javascript:;" data-type="twitter">
+            <i class="icon icon-twitter"></i>
+          </a>
+          <a class="google share-sns" href="javascript:;" data-type="google">
+            <i class="icon icon-google"></i>
+          </a>
         </div>
-        <div class="clearfix"></div>
-    </header>
+      </div>
+    </span>
+  </div>
+</div>
+
+<div class="page-modal wx-share js-wx-box">
+    <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
+    <p>扫一扫，分享到微信</p>
+    <div class="wx-qrcode">
+      <img src="http://s.jiathis.com/qrcode.php?url=http://yoursite.com/2017/06/01/webpack的使用方法/" alt="微信分享二维码">
+    </div>
+</div>
+
+<div class="mask js-mask"></div>
+      
+      <div class="clearfix"></div>
+    </div>
   </div>
 </article>
+
   
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/12/闭包/" class="archive-article-date">
-  	<time datetime="2017-04-11T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-12</time>
-</a>
+<nav id="article-nav">
+  
+    <a href="/2017/06/02/webpack的工具使用(编译中)/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
+        
+          Webpack自刷新和插件的使用
+        
+      </div>
+    </a>
+  
+  
+    <a href="/2017/05/27/面向对象的三大特性/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">面向对象的三大特性</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
         </div>
-    	 
+        
+        
+    </div>
+</aside>
+
+
+
   
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/12/闭包/">闭包</a>
-    </h1>
+  
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js高级</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-    
-    
-    <article class="archive-article archive-type-post">
-  <div class="archive-article-inner">
-    <header class="archive-article-header">
-      	<div class="article-meta">
-	      	<a href="/2017/04/01/递归/" class="archive-article-date">
-  	<time datetime="2017-03-31T16:00:00.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-04-01</time>
-</a>
-        </div>
-    	 
-  
-    <h1 itemprop="name">
-      <a class="archive-article-title" href="/2017/04/01/递归/">递归</a>
-    </h1>
   
 
-        <div class="article-info info-on-right">
-          
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">js高级</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-          
-
-        </div>
-        <div class="clearfix"></div>
-    </header>
-  </div>
-</article>
-  
-  
-    </div></section>
   
 
-    
-    <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/archives/">&laquo; Prev</a><a class="page-number" href="/archives/">1</a><span class="page-number current">2</span>
-    </nav>
   
 
 
@@ -304,8 +459,8 @@
 	var yiliaConfig = {
 		mathjax: false,
 		isHome: false,
-		isPost: false,
-		isArchive: true,
+		isPost: true,
+		isArchive: false,
 		isTag: false,
 		isCategory: false,
 		open_in_new: false,
