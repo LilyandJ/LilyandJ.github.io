@@ -8,18 +8,18 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>Webpack自刷新和插件的使用 | A fish in the sea</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="#####回顾模块化模块化是一种将系统分离成独立功能部分的方法，可将系统分割成独立的功能部分，严格定义模块接口（功能）、模块间具有透明性。 #####模块化是实现方式1)CommonJS 服务器端的 Node.js 遵循 CommonJS规范，该规范的核心思想是允许模块通过 require 方法来“同步”加载所要依赖的其他模块，然后通过 exports 或 module.exports 来导出需要">
+  <meta name="description" content="#####webpack-dev-server是什么?webpack-dev-server是webpack中常用的工具，它是一个服务器,基于express，并且提供热加载功能，方便我们开发。 #####安装webpack-dev-servercnpm install webpack-dev-server //本地安装 #####使用webpack-dev-serverwebpack-dev-ser">
 <meta name="keywords" content="工具">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Webpack自刷新和插件的使用">
 <meta property="og:url" content="http://yoursite.com/2017/06/02/webpack的工具使用(编译中)/index.html">
 <meta property="og:site_name" content="A fish in the sea">
-<meta property="og:description" content="#####回顾模块化模块化是一种将系统分离成独立功能部分的方法，可将系统分割成独立的功能部分，严格定义模块接口（功能）、模块间具有透明性。 #####模块化是实现方式1)CommonJS 服务器端的 Node.js 遵循 CommonJS规范，该规范的核心思想是允许模块通过 require 方法来“同步”加载所要依赖的其他模块，然后通过 exports 或 module.exports 来导出需要">
+<meta property="og:description" content="#####webpack-dev-server是什么?webpack-dev-server是webpack中常用的工具，它是一个服务器,基于express，并且提供热加载功能，方便我们开发。 #####安装webpack-dev-servercnpm install webpack-dev-server //本地安装 #####使用webpack-dev-serverwebpack-dev-ser">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-15T23:25:56.432Z">
+<meta property="og:updated_time" content="2017-11-16T05:07:54.704Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Webpack自刷新和插件的使用">
-<meta name="twitter:description" content="#####回顾模块化模块化是一种将系统分离成独立功能部分的方法，可将系统分割成独立的功能部分，严格定义模块接口（功能）、模块间具有透明性。 #####模块化是实现方式1)CommonJS 服务器端的 Node.js 遵循 CommonJS规范，该规范的核心思想是允许模块通过 require 方法来“同步”加载所要依赖的其他模块，然后通过 exports 或 module.exports 来导出需要">
+<meta name="twitter:description" content="#####webpack-dev-server是什么?webpack-dev-server是webpack中常用的工具，它是一个服务器,基于express，并且提供热加载功能，方便我们开发。 #####安装webpack-dev-servercnpm install webpack-dev-server //本地安装 #####使用webpack-dev-serverwebpack-dev-ser">
   
     <link rel="alternative" href="/atom.xml" title="A fish in the sea" type="application/atom+xml">
   
@@ -173,143 +173,65 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        <p>#####回顾模块化<br>模块化是一种将系统分离成独立功能部分的方法，可将系统分割成独立的功能部分，严格定义模块接口（功能）、模块间具有透明性。</p>
-<p>#####模块化是实现方式<br>1)<strong>CommonJS</strong></p>
-<p>服务器端的 Node.js 遵循 CommonJS规范，该规范的核心思想是允许模块通过 require 方法来“同步”加载所要依赖的其他模块，然后通过 exports 或 module.exports 来导出需要暴露的接口(功能)。</p>
-<p>2)<strong>AMD</strong></p>
-<p>define(id?, dependencies?, factory)，它要在声明模块的时候指定所有的依赖 dependencies，并且还要当做形参传到 factory 中，对于依赖的模块提前执行，依赖前置。</p>
-<ul>
-<li><p>id?模块的名字 : 一般名字不需要写，名字默认为模块所在路径（script/a）。</p>
-</li>
-<li><p>dependencies?：模块依赖的其他模块([‘jquery’,’jquery.validate’])。</p>
-</li>
-<li><p>factory:创建模块的工厂function(jquery, validate)。</p>
-</li>
-</ul>
-<p>3)<strong>CMD</strong></p>
-<p>Common Module Definition （CMD）规范和 AMD 很相似，尽量保持简单，并与 CommonJS 和 Node.js 的 Modules 规范保持了很大的兼容性。</p>
-<h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><p><strong>接下来进入主体</strong></p>
-<p>##Webpack :前端”模块化管理”和”打包工具”。</p>
-<ul>
-<li>1)<strong>全局安装webpack （安装webpack命令行工具）</strong></li>
-<li>2)<strong>本地安装（项目依赖),在你的项目文件下</strong></li>
-<li><p>3)<strong>命令行打包</strong></p>
-<pre><code>webpack a.js bundle.js
-a.js 主文件(入口文件，第一个被页面加载的文件）
-bundle.js 打包后的文件(文件内容包含a.js和a.js依赖的所有文件)
-</code></pre></li>
-</ul>
-<p>###webpack配置文件<br><strong>webpack提供了配置文件webpack.config.js，我们可以把webpack后面的参数放到配置文件中，之后直接使用webpack命令执行。</strong><br>具体配置步骤如下:</p>
-<ul>
-<li><p><strong>1.新建webpack.config.js(项目根目录创建webpack.config.js文件，拷贝以下模板)</strong></p>
-<pre><code>webpack.config.js
+        <p>#####webpack-dev-server是什么?<br>webpack-dev-server是webpack中常用的工具，它是一个服务器,基于express，并且提供热加载功能，方便我们开发。</p>
+<p>#####安装webpack-dev-server<br>cnpm install webpack-dev-server //本地安装</p>
+<p>#####使用webpack-dev-server<br>webpack-dev-server服务器启动后，默认使用iframe帮我们自动刷新。</p>
+<p>执行webpack-dev-server –hot –inline; </p>
+<pre><code>--hot 采用热部署，不用F5就可以刷新页面（AJAX）。
+--inline无需刷新页面就可以更新(刷新的代码直接嵌套在我们的打包文件中)
+</code></pre><h2 id=""><a href="#" class="headerlink" title=""></a><a id="more"></a></h2><p><strong>我们也可以采用配置替代参数</strong></p>
+<pre><code>入口文件
+entry: [
+          &apos;webpack-dev-server/client?http://localhost:8080/&apos;, //嵌入开发者服务器（--inline）
+          &apos;webpack/hot/dev-server&apos;, //嵌入热部署，无需刷新页面，自动更新（--hot）
+          &apos;./scripts/main&apos; //应用的入口文件
+ ]
 
-var webpack = require(&apos;webpack&apos;);
-
-module.exports = {
+插件 hot部署插件
+plugins:[
+      new webpack.ProvidePlugin({
+            $: &quot;jquery&quot;
+        }),
+    new webpack.HotModuleReplacementPlugin()
+]
+</code></pre><p>#####接下来让我们来说一下 webpack插件<br>Webpack除了处理模块打包和加载，还为我们提供了插件功能，比如:js压缩，内容提取….<br>插件列表： <a href="http://webpack.github.io/docs/list-of-plugins.html" target="_blank" rel="external">http://webpack.github.io/docs/list-of-plugins.html</a></p>
+<p><strong>插件的使用</strong><br>使用插件，只需要在webpack.config.js中的plugins中配置即可。</p>
+<pre><code>module.exports = {
+.....
+.....
+.....
+plugins:[
+        //注释添加到生成的文件的头部
+        new webpack.BannerPlugin(&quot;webpack 打包制作&quot;),
+        //压缩插件
+        new webpack.optimize.UglifyJsPlugin({
+            //去掉所有注释
+            comments:false,
+            //抑制警告
+            compress:{
+                warnings:false
+            }
+        }),
+    ]
+};
+</code></pre><p><strong>CommonsChunkPlugin 提取公共块插件</strong><br>多个入口，及多个页面，公共部分有利于缓存，而不是多个入口都将依赖分别导出到独立模块。</p>
+<pre><code>module.exports = {
     //主文件
-    entry:&quot;./scripts/a&quot;,
-
-    //配置输出
-    output:{
-        //输出的路径
-        path:&quot;static/&quot;,
-        //输出的文件名
-        filename:&quot;bundle.js&quot;,
-        //浏览器引用时的输出文件的公共URL地址
-        publicPath:&quot;/static/&quot;
-    }
-}
-</code></pre></li>
-<li><p><strong>2.执行webpack命令</strong></p>
-</li>
-</ul>
-<hr>
-<p>#####webpack原生仅支持JavaScript模块加载（require(‘/xxx.js’)），如果需要提供其他的模块加载器，那么我们就必须进行安装。<br>如果直接通过require去加载非js文件，那么会报错。</p>
-<pre><code>You may need an appropriate loader to handle this file type.（提示差加载器）
-
-
-Cannot resolve module &apos;style-loader&apos;（没有安装模块。指定加载器，没有安装）
-</code></pre><hr>
-<p>##loader模块加载器<br>这是他的官网加载器列表 <a href="http://webpack.github.io/docs/loader-conventions.html" title="webpack class" target="_blank" rel="external">点这</a>  和 <a href="http://webpack.github.io/" title="webpack" target="_blank" rel="external">官网</a></p>
-<p>#####下面是几个常用的模块加载器使用方法:</p>
-<ul>
-<li><p><strong>1)style模块加载器</strong></p>
-<pre><code>style-loader: style文件加载器
-npm install css-loader style-loader --save-dev来安装这些loader
-使用模块加载器，你还需要在webpack.config.js中进行配置
-</code></pre></li>
-</ul>
-<pre><code>    var webpack = require(&apos;webpack&apos;);
-    module.exports = {
-        //主文件
-        entry:&quot;./scripts/a&quot;,
-
-        //配置输出
-        output:{
-            //输出的路径
-            path:&quot;static/&quot;,
-            //输出的文件名
-            filename:&quot;bundle.js&quot;,
-            //浏览器引用时的输出文件的公共URL地址
-            publicPath:&quot;/static/&quot;,
-            pathinfo:true
-        },
-
-        //模块配置
-        module:{
-            //模块加载器
-            loaders:[
-                 //test   ： 使用该加载器文件名的匹配模式
-                 //loader ： 加载器，多个由!连接。  style和css ,css加载器是读取css内容，style把读取到的css内容通过&lt;style&gt;标签添加到页面中。
-                 {test: /\.css$/, loader: &apos;style-loader!css-loader&apos;}
-            ]
-        }
-    }
-最后还需要在主文件中引入css模块
-
-    require(&quot;../styles/a.css&quot;);
-</code></pre><ul>
-<li><p><strong>2) less模块加载器</strong></p>
-<p>  安装：npm install less-loader –save-dev<br>(你需要先确保你的项目中有安装了less)</p>
-<p>  <strong>//模块配置</strong></p>
-<pre><code>module:{
-    //模块加载器
-    loaders:[
-          .........
-     {test:/\.less$/, loader: &apos;style!css!less&apos;}
+    entry:{
+          //多个入口
+        index:&apos;./scripts/a&apos;,
+        c:&quot;./scripts/c&quot;  
+    },
+    .................
+    plugins:[
+        //注释添加到生成的文件的头部
+        new webpack.BannerPlugin(&quot;webpack 打包制作&quot;),
+        // 提供公共代码
+        // 默认会把所有入口节点(index和c)的公共代码提取出来,生成一个common.js
+         new webpack.optimize.CommonsChunkPlugin(&apos;common.js&apos;)
     ]
 }
-</code></pre></li>
-</ul>
-<p>导入myless.less模块。</p>
-<pre><code>require(&quot;../styles/myless.less&quot;);
-</code></pre><ul>
-<li><strong>3)url资源加载器</strong></li>
-</ul>
-<p>url-loader对图片的加载器，将采用如果图片小可以采用base64（内嵌在js中）。</p>
-<p>安装:npm install file-loader –save-dev</p>
-<p>npm install url-loader –save-dev (要先有file-loader加载器)</p>
-<p><strong>//模块配置</strong></p>
-<pre><code> module:{
-      loaders:[
-          ........
-          {
-              test: /\.(jpg|png|gif)$/,
-              loader:&apos;url?name=[path]/[name].[ext]&amp;limit=8192&apos;
-          }
-      ]
-  }
-limit 8192 代表图片小于8K就采用base64内嵌在模块中。
-name 生成文件的路径。
-</code></pre><p>在html页面中</p>
-<pre><code>&lt;img src=&quot;&quot; alt=&quot;&quot; id=&quot;img1&quot;/&gt;
-</code></pre><p>在主文件下引入</p>
-<pre><code>//加载图片
-var img1=require(&apos;../images/1.jpg&apos;);
-document.querySelector(&apos;#img1&apos;).src=img1;
-</code></pre><p>注:webpack会将图片转换成一个相对应的base64码的地址</p>
-
+</code></pre>
       
 
       
